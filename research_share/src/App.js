@@ -1,8 +1,17 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import ipfsClient from 'ipfs-http-client';
 import './App.css';
 
-function UploadButton({extractor}) {
+const ipfs = ipfsClient(
+  {
+    host : 'ipfs.infura.io/ipfs/',
+    port : '5001',
+    protocol : 'https'
+  }
+);
+
+function UploadFileButton({extractor}) {
   const [data, setData] = React.useState(null);
   React.useEffect(() => extractor(data), [data, extractor]);
   const handleClick = (event) => {
@@ -28,15 +37,22 @@ function UploadButton({extractor}) {
   )
 }
 
-function UploadToIpfs(props) {
-  // your string is  props.stringFile
-  //connect to ipfs node
+function UploadToIpfsButton(props) {
+  const UploadToIpfs = async (data) => {
+      const results = await ipfs.add(data);
+      //console.log('you need to upload the node here', {data});
+  }
+  const handleClick = (event) => {
+    UploadToIpfs(props.data);
+  }
 
-  //upload the string to it
-
-  //end the function
-
-  return <div></div>
+  return (
+    <div className="UploadToIpfsButton">
+      <Button component="label" onClick={handleClick}>
+        {'Upload To Ipfs'}
+      </Button>
+    </div>
+  )
 }
 
 function App() {
@@ -44,10 +60,10 @@ function App() {
 
   return (
     <div className="App">
-      <UploadButton extractor={setStringFile}>
-      </UploadButton>
-      <UploadToIpfs>
-      </UploadToIpfs>
+      <UploadFileButton extractor={setStringFile}>
+      </UploadFileButton>
+      <UploadToIpfsButton data={stringFile}>
+      </UploadToIpfsButton>
     </div>
   );
 }
