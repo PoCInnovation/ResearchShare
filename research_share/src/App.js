@@ -3,6 +3,9 @@ import Button from '@material-ui/core/Button';
 import ipfsClient from 'ipfs-http-client';
 import './App.css';
 
+const all = require('it-all')
+const concat = require('it-concat')
+
 const ipfs = ipfsClient(
   {
     host : 'ipfs.infura.io',
@@ -10,6 +13,9 @@ const ipfs = ipfsClient(
     protocol : 'https'
   }
 );
+
+// Pas compris pk mais l'extracteur sur data fait pas son taf
+var content;
 
 function UploadFileButton({extractor}) {
   const [data, setData] = React.useState(null);
@@ -23,7 +29,8 @@ function UploadFileButton({extractor}) {
     reader.readAsArrayBuffer(files[0]);
     reader.onload = (ev) => {
       let buffer = new Buffer.from(reader.result);
-      setData(buffer.toString());
+      content = buffer.toString();
+      // setData(buffer.toString());
     };
   }
 
@@ -45,9 +52,10 @@ function UploadToIpfsButton({extractor}, {data}) {
   const UploadToIpfs = async (data) => {
       const results = await ipfs.add(data);
       setHash(results.path);
+      console.log(`Path : ${results.path}`);
   }
   const handleClick = (event) => {
-    UploadToIpfs(data);
+    UploadToIpfs(content);
   }
 
   return (
@@ -61,9 +69,9 @@ function UploadToIpfsButton({extractor}, {data}) {
 
 function DownloadButton({hash}) {
   const DownloadFromIpfs = async (hash) => {
-    // do something to get the object with the hash
-    //const result = ipfs.get({path : {hash}});
-    //console.log(result);
+    const result = await all(ipfs.get(hash));
+    const file_content=await concat(result[0].content);
+    console.log(`file content : ${file_content}`);
   }
   const handleClick = (event) => {
     DownloadFromIpfs(hash);
