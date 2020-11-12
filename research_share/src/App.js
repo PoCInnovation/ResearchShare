@@ -14,9 +14,6 @@ const ipfs = ipfsClient(
   }
 );
 
-// Pas compris pk mais l'extracteur sur data fait pas son taf
-var content;
-
 function UploadFileButton({extractor}) {
   const [data, setData] = React.useState(null);
   React.useEffect(() => extractor(data), [data, extractor]);
@@ -29,10 +26,9 @@ function UploadFileButton({extractor}) {
     reader.readAsArrayBuffer(files[0]);
     reader.onload = (ev) => {
       let buffer = new Buffer.from(reader.result);
-      content = buffer.toString();
-      // setData(buffer.toString());
+      setData(() => buffer.toString());
     };
-  }
+    }
 
   return (
     <div className="UploadButton">
@@ -45,22 +41,19 @@ function UploadFileButton({extractor}) {
   )
 }
 
-function UploadToIpfsButton({extractor}, {data}) {
+function UploadToIpfsButton({extractor, data}) {
   const [hash, setHash] = React.useState(null);
   React.useEffect(() => extractor(hash), [hash, extractor]);
 
   const UploadToIpfs = async (data) => {
+      console.log(`data : ${data}`);
       const results = await ipfs.add(data);
       setHash(results.path);
       console.log(`Path : ${results.path}`);
   }
-  const handleClick = (event) => {
-    UploadToIpfs(content);
-  }
-
   return (
     <div className="UploadToIpfsButton">
-      <Button component="label" onClick={handleClick}>
+      <Button component="label" onClick={() => {UploadToIpfs(data);}}>
         {'Upload To Ipfs'}
       </Button>
     </div>
@@ -70,16 +63,13 @@ function UploadToIpfsButton({extractor}, {data}) {
 function DownloadButton({hash}) {
   const DownloadFromIpfs = async (hash) => {
     const result = await all(ipfs.get(hash));
-    const file_content=await concat(result[0].content);
+    const file_content = await concat(result[0].content);
     console.log(`file content : ${file_content}`);
-  }
-  const handleClick = (event) => {
-    DownloadFromIpfs(hash);
   }
 
   return (
     <div className="UploadToIpfsButton">
-      <Button component="label" onClick={handleClick}>
+      <Button component="label" onClick={() => {DownloadFromIpfs(hash);}}>
         {'Download From Ipfs'}
       </Button>
     </div>
@@ -92,12 +82,9 @@ function App() {
 
   return (
     <div className="App">
-      <UploadFileButton extractor={setStringFile}>
-      </UploadFileButton>
-      <UploadToIpfsButton data={stringFile} extractor={setNodeHash}>
-      </UploadToIpfsButton>
-      <DownloadButton hash={nodeHash}>
-      </DownloadButton>
+      <UploadFileButton extractor={setStringFile}/>
+      <UploadToIpfsButton data={stringFile} extractor={setNodeHash}/>
+      <DownloadButton hash={nodeHash}/>
     </div>
   );
 }
