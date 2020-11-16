@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.FileContent {
+  white-space:pre-wrap;
+  text-align: left;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
