@@ -68,7 +68,7 @@ function uploadButtonBase({inputOnChange, buttonOnClick}) {
  * @param fileHash {string} - Hash of the file, obtained via its upload.
  * @returns {JSX.Element}
  */
-function uploadButtonWitHash({base, fileHash}) {
+function uploadButtonWithHash({base, fileHash}) {
     return (
         <div className={"UploadButtonWithHash"}>
             {base}
@@ -102,5 +102,5 @@ export function UploadButton({ipfs}) {
     };
 
     const base = uploadButtonBase({inputOnChange, buttonOnClick});
-    return !fileHash ? base : uploadButtonWitHash({base, fileHash});
+    return !fileHash ? base : uploadButtonWithHash({base, fileHash});
 }

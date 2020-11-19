@@ -2,7 +2,7 @@ import React from 'react';
 import ipfsClient from 'ipfs-http-client';
 import './App.css';
 import {UploadButton} from './ButtonUpload';
-import { DownloadButton } from './ButtonDownload';
+import {DownloadButton} from './ButtonDownload';
 
 const ipfs = ipfsClient(
   {
