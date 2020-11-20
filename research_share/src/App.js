@@ -1,8 +1,11 @@
 import React from 'react';
 import ipfsClient from 'ipfs-http-client';
+
 import './App.css';
+
 import {UploadButton} from './ButtonUpload';
 import {DownloadButton} from './ButtonDownload';
+import {SmartContractAdd} from './SmartContractAdd';
 
 const ipfs = ipfsClient(
   {
@@ -16,6 +19,8 @@ function App() {
     return (
         <div className="App">
             <h1>Research Share</h1>
+            <SmartContractAdd/>
+            <br/>
             <UploadButton ipfs={ipfs}/>
             <br/>
             <DownloadButton ipfs={ipfs}/>
