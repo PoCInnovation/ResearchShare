@@ -18,7 +18,7 @@ describe('test', () => {
         accounts = await web3.eth.getAccounts();
         contract = await new web3.eth.Contract(contract_abi).deploy(
                 {data : contract_bytecode.object, arguments: ['Hello', 'World']}
-            ).send({from: accounts[0], gas: '1000000'});
+            ).send({from: accounts[0], gas: 1000000});
         contract.setProvider(provider);
     });
     it('contract deployed', async () => {
