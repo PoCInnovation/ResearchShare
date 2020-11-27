@@ -2,14 +2,14 @@
 	{
 		"inputs": [
 			{
-				"internalType": "int256",
-				"name": "_nb1",
-				"type": "int256"
+				"internalType": "string",
+				"name": "_str1",
+				"type": "string"
 			},
 			{
-				"internalType": "int256",
-				"name": "_nb2",
-				"type": "int256"
+				"internalType": "string",
+				"name": "_str2",
+				"type": "string"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -27,9 +27,9 @@
 		"name": "result",
 		"outputs": [
 			{
-				"internalType": "int256",
+				"internalType": "string",
 				"name": "",
-				"type": "int256"
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -38,12 +38,12 @@
 	{
 		"inputs": [
 			{
-				"internalType": "int256",
-				"name": "_nb",
-				"type": "int256"
+				"internalType": "string",
+				"name": "_str",
+				"type": "string"
 			}
 		],
-		"name": "setFirstNumber",
+		"name": "setFirstString",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -51,12 +51,12 @@
 	{
 		"inputs": [
 			{
-				"internalType": "int256",
-				"name": "_nb",
-				"type": "int256"
+				"internalType": "string",
+				"name": "_str",
+				"type": "string"
 			}
 		],
-		"name": "setSecondNumber",
+		"name": "setSecondString",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
