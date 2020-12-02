@@ -16,8 +16,6 @@ code {
   border-width: 1px;
   border-style: solid;
   border-color: black;
-  position: absolute;
-  left: 10px;
 }
 
 #download > * {
@@ -25,7 +23,7 @@ code {
 }
 
 #download_button {
-  width: 10%;
+  width: 25%;
 }
 
 #download_input {
@@ -37,7 +35,7 @@ code {
 }
 
 #upload_button {
-  width: 10%;
+  width: 25%;
 }
 
 #upload_input {
