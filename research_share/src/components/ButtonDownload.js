@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import './App.css';
+import '../style/App.css';
 
 const all = require('it-all')
 const concat = require('it-concat')
