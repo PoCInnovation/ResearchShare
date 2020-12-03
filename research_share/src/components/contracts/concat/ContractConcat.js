@@ -64,9 +64,8 @@ export function ContractConcat() {
     const [hideLoader, setHideLoader] = useState(true);
     const [isContractDeployed, setIsContractDeployed] = useState(false);
 
-    const [contractAddress, setContractAddress] = useState(null);
+    const [contract, setContract] = useState(null);
 
-    let contract = undefined;
     let accounts = ethEnabled(window);
 
     function alertIfMetamaskIsNotInstalled() {
@@ -81,10 +80,9 @@ export function ContractConcat() {
             accounts, setAccountAddress, setAccountBalance
         );
         setHideLoader(false);
-        contract = await new window.web3.eth.Contract(contract_abi).deploy(
+        setContract(await new window.web3.eth.Contract(contract_abi).deploy(
             {data : contract_bytecode.object, arguments: ['Hello', 'World']}
-        ).send({from: accounts[0], gas: '1000000'});
-        setContractAddress(truncate(contract.options.address, 15));
+        ).send({from: accounts[0], gas: '1000000'}));
         updateBalance(accounts, setAccountBalance, setHideLoader);
         setIsContractDeployed(true);
     }
@@ -96,7 +94,11 @@ export function ContractConcat() {
             : null }
 
             { isContractDeployed ?
-                <p><h3>{'Contract ' + contractAddress}</h3></p>
+                <h3>
+                    <p>
+                        Contract {contract ? truncate(contract.options.address, 15) : null} succesfuly deployed !
+                    </p>
+                </h3>
             : null }
 
             <AccountsArray
