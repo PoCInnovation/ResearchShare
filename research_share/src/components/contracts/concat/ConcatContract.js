@@ -5,8 +5,8 @@ import { AccountsArray } from '../AccountsArray';
 import { DeployButton } from './ConcatDeployButton';
 import { ConcatInteract } from './ConcatInteract';
 
-const contract_abi = require('../../../contracts/concat_abi.json');
-const contract_bytecode = require('../../../contracts/concat_bytecode.json');
+const contract_abi = require('../../../contracts/concat/concat_abi.json');
+const contract_bytecode = require('../../../contracts/concat/concat_bytecode.json');
 
 //TODO loop on all the acocunts to fill all the balances
 async function updateBalance(accounts, setAccountBalances) {
