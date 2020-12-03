@@ -9,6 +9,8 @@ import { makeStyles } from '@material-ui/core';
 
 import PulseLoader from 'react-spinners/PulseLoader';
 
+import { truncate } from '../../Utils.js';
+
 const useStyles = makeStyles((theme) => ({
     title: {
         display: 'inline-block',
@@ -22,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //TODO put all the elements in the array and not only the first
-export function AccountsArray({hideLoader, addresses, balances})
+export function AccountsArray({isLoaderLoading, addresses, balances})
 {
     const classes = useStyles();
 
@@ -30,12 +32,12 @@ export function AccountsArray({hideLoader, addresses, balances})
         <Grid container spacing={2}>
             <Grid item xs={12} md={12}>
                 <Typography variant="h6" style={{margin: '4, 0, 2'}}>
-                    <div className={hideLoader ? classes.title : classes.title2}>
+                    <div className={isLoaderLoading ? classes.title2 : classes.title}>
                         Accounts
                     </div>
                     <div style={{display: 'inline-block', position: 'relative', float: 'right', marginRight: '20px'}}>
                         <PulseLoader
-                            css={hideLoader ? {display: 'none'} : {display: 'block'}}
+                            css={isLoaderLoading ? {display: 'block'} : {display: 'none'}}
                             size={10}
                             color={"#123abc"}
                         />
@@ -45,7 +47,7 @@ export function AccountsArray({hideLoader, addresses, balances})
                     <List>
                         <ListItem>
                             <ListItemText
-                                primary={addresses[0]}
+                                primary={truncate(addresses[0], 25)}
                                 secondary={balances[0]}
                             />
                         </ListItem>

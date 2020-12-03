@@ -5,7 +5,7 @@ import './style/App.css';
 
 import { UploadButton } from './components/ButtonUpload';
 import { DownloadButton } from './components/ButtonDownload';
-import { ContractConcat } from './components/contracts/concat/ContractConcat';
+import { ContractConcat } from './components/contracts/MetamaskConnect';
 
 const ipfs = ipfsClient(
   {
