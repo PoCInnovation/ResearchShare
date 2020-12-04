@@ -20,10 +20,10 @@ function App() {
         <div className="App">
             <h1>Research Share</h1>
             <div>
-              <div style={{display: 'inline-block', position: 'relative', float: 'left', width: '20%'}}>
+              <div style={{display: 'inline-block', position: 'relative', float: 'left', width: '20%', marginLeft: '5%'}}>
                 <ContractConcat/>
               </div>
-              <div style={{display: 'inline-block', position: 'relative', right: '10%'}}>
+              <div style={{display: 'inline-block', position: 'relative', right: '12.5%'}}>
                 <UploadButton ipfs={ipfs}/>
                 <br/>
                 <DownloadButton ipfs={ipfs}/>

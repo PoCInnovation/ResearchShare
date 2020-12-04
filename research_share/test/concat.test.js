@@ -4,8 +4,8 @@ const assert = require('assert');
 const ganache = require('ganache-cli');
 const Web3 = require('web3');
 
-const contract_abi = require('../src/contracts/concat_abi.json');
-const contract_bytecode = require('../src/contracts/concat_bytecode.json');
+const contract_abi = require('../src/contracts/concat/concat_abi.json');
+const contract_bytecode = require('../src/contracts/concat/concat_bytecode.json');
 
 const provider = ganache.provider();
 const web3 = new Web3(provider);

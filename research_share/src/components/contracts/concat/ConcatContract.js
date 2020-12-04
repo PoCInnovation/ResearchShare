@@ -9,7 +9,7 @@ const contract_abi = require('../../../contracts/concat/concat_abi.json');
 const contract_bytecode = require('../../../contracts/concat/concat_bytecode.json');
 
 //TODO loop on all the acocunts to fill all the balances
-async function updateBalance(accounts, setAccountBalances) {
+export async function updateBalances(accounts, setAccountBalances) {
     for (const account of accounts) {
         const balance = await window.ethereum.request(
             {method: "eth_getBalance", params: [account, "latest"]}
@@ -22,23 +22,24 @@ async function updateBalance(accounts, setAccountBalances) {
 }
 
 export function ContractConcatContent({accountsAddresses}) {
-    const [accounts, setAccounts] = useState([accountsAddresses]);
     const [accountBalances, setAccountBalances] = useState(null);
-    const [isLoaderLoading, setIsLoaderLoading] = useState(false);
+    const [spinner, setSpinner] = useState(false);
     const [isContractDeployed, setIsContractDeployed] = useState(false);
     const [contract, setContract] = useState(null);
 
+    const accounts = [accountsAddresses];
+
     useEffect(() => {
-        updateBalance(accounts, setAccountBalances);
+        updateBalances(accounts, setAccountBalances);
     }, [accounts, isContractDeployed]);
 
     async function handleClick(event) {
-        setIsLoaderLoading(true);
+        setSpinner(true);
         setContract(await new window.web3.eth.Contract(contract_abi).deploy(
-            {data : contract_bytecode.object, arguments: ['Hello', 'World']}
+            {data : contract_bytecode.object, arguments: ['Easter', 'Egg']}
         ).send({from: accounts[0], gas: '1000000'}));
         setIsContractDeployed(true);
-        setIsLoaderLoading(false);
+        setSpinner(false);
     }
 
     return (
@@ -47,7 +48,7 @@ export function ContractConcatContent({accountsAddresses}) {
             { isContractDeployed ?
                 <h3>
                     <p>
-                        Contract {contract ? truncate(contract.options.address, 15) : null} succesfuly deployed !
+                        Contract {contract ? truncate(contract.options.address, 20) : null} successfully deployed !
                     </p>
                 </h3>
                 :
@@ -55,12 +56,19 @@ export function ContractConcatContent({accountsAddresses}) {
             }
 
             <AccountsArray
-                isLoaderLoading={isLoaderLoading}
+                spinner={spinner}
                 addresses={accounts}
                 balances={[accountBalances]}
             />
 
-            { isContractDeployed ? <ConcatInteract/> : null }
+            { isContractDeployed ?
+                <ConcatInteract
+                    contract={contract}
+                    accounts={accounts}
+                    setSpinner={setSpinner}
+                    setAccountBalances={setAccountBalances}
+                />
+            : null }
         </div>
     );
 }

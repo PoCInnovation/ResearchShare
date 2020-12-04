@@ -1,0 +1,18 @@
+.stringInputs {
+    float: left;
+    width: 160px;
+    margin-left: 20px;
+    margin-top: 5px;
+    height: 20px;
+}
+
+.submitButtons {
+    float: right;
+    width: 160px;
+    right: 20px;
+}
+
+.lastButton {
+    width: 120px;
+    height: 40px;
+}

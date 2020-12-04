@@ -31,7 +31,7 @@ function  downloadButtonBase({inputOnChange, buttonOnClick})  {
             <input id="download_input" type="text" name="HashField" onChange={inputOnChange}/>
             <Button id="download_button" variant="contained" color="primary"
                     onClick={buttonOnClick}>
-                {'Download'}
+                Download
             </Button>
         </div>
     );
