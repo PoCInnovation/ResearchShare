@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import '../../../css/ConcatInteract.css';
 
 import Button from '@material-ui/core/Button';
 
 import { updateBalances } from './ConcatContract';
-import '../../../style/ConcatContract.css';
 
 async function setFirstString(contract, accounts, param) {
     await contract.methods.setFirstString(param).send({from: accounts[0], gas: '1000000'});

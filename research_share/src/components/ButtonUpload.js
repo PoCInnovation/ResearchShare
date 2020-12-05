@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import '../style/App.css';
+import '../css/ButtonUpload.css';
 
 /**
  * Upload the content of a file to IPFS via the client and save the file's hash.
@@ -53,11 +53,10 @@ function getFileContent(file, setFileContent) {
  */
 function uploadButtonBase({inputOnChange, buttonOnClick}) {
     return (
-        <div id="upload" className={"UploadButtonBase"}>
-            <input id="upload_input" name={"GetFile"} type={"file"} onChange={inputOnChange}/>
-            <Button id="upload_button" name={"Upload"} onClick={buttonOnClick}
-                    variant="contained" color="primary">
-                {'Upload'}
+        <div id="upload" className="UploadButtonBase">
+            <input id="upload_input" onChange={inputOnChange} type="file"/>
+            <Button id="upload_button" onClick={buttonOnClick} variant="contained" color="primary">
+                Upload
             </Button>
         </div>
     );
@@ -72,11 +71,11 @@ function uploadButtonBase({inputOnChange, buttonOnClick}) {
  */
 function uploadButtonWithHash({base, fileHash}) {
     return (
-        <div className={"UploadButtonWithHash"}>
+        <div className="UploadButtonWithHash">
             {base}
             <br/>
-            <br/>
             {'Success: ' + fileHash}
+            <br/>
         </div>
     )
 }

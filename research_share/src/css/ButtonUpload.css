@@ -1,0 +1,20 @@
+#upload {
+    margin-left: 10%;
+    margin-right: 10%;
+    display: inline-block;
+    height: 30%;
+}
+
+#success {
+    margin-top: 10%;
+}
+
+#upload_input {
+    width: 50%;
+    float: left;
+}
+
+#upload_button {
+    width: 30%;
+    float: right;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../../../css/ConcatContract.css';
 
 import { truncate } from '../../../Utils';
 import { AccountsArray } from '../AccountsArray';
@@ -43,8 +44,7 @@ export function ContractConcatContent({accountsAddresses}) {
     }
 
     return (
-        <div className="test_smart_contract">
-
+        <div id="ConcatContract">
             { isContractDeployed ?
                 <h3>
                     <p>

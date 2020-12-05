@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import '../style/App.css';
+import '../css/ButtonDownload.css';
 
 const all = require('it-all')
 const concat = require('it-concat')
@@ -27,10 +27,9 @@ async function downloadFromIPFS(ipfs, hash, setContent) {
  */
 function  downloadButtonBase({inputOnChange, buttonOnClick})  {
     return (
-        <div id="download" className={"DownloadButtonBase"}>
-            <input id="download_input" type="text" name="HashField" onChange={inputOnChange}/>
-            <Button id="download_button" variant="contained" color="primary"
-                    onClick={buttonOnClick}>
+        <div className="DownloadButtonBase">
+            <input id="download_input" onChange={inputOnChange} type="text" name="HashField"/>
+            <Button id="download_button" onClick={buttonOnClick} variant="contained" color="primary">
                 Download
             </Button>
         </div>
@@ -46,10 +45,12 @@ function  downloadButtonBase({inputOnChange, buttonOnClick})  {
  */
 function downloadButtonWithContent({base, content}) {
     return (
-        <div className={"DownloadButtonWithContent"}>
+        <div className="DownloadButtonWithContent">
             {base}
+            <div id="success">
             <br/>
             <div className={"FileContent"}>{content}</div>
+            </div>
         </div>
     )
 }
@@ -76,5 +77,9 @@ export function DownloadButton({ipfs}) {
     };
 
     const base = downloadButtonBase({inputOnChange, buttonOnClick});
-    return !content ? base : downloadButtonWithContent({base, content});
+    return (
+        <div id="upload">
+            {!content ? base : downloadButtonWithContent({base, content})}
+        </div>
+    );
 }

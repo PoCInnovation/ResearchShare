@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../../css/MetamaskConnect.css';
 
 import { ContractConcatContent } from './concat/ConcatContract';
 

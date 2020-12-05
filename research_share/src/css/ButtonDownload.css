@@ -1,0 +1,16 @@
+#download {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
+    height: 40%;
+}
+
+#download_input {
+    width: 40%;
+    float: left;
+}
+
+#download_button {
+    width: 40%;
+    float: right;
+}
