@@ -42,7 +42,11 @@ export function UserInteract({contract, accounts, setSpinner, setAccountBalances
     const handleClickGetUser = () => {
         const user = contractCaller(
             async () => {
-                await getCurrentUser(contract, accounts).then((value) => {setUser(value); console.log(value)});
+                await getCurrentUser(contract, accounts).then((value) => {
+                    setUser(value);
+                    console.log(value);
+                    setSpinner(false);
+                });
                 return (user);
             },
             accounts,
