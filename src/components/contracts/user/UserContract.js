@@ -3,11 +3,11 @@ import '../../../css/ConcatContract.css';
 
 import { truncate } from '../../../Utils';
 import { AccountsArray } from '../AccountsArray';
-import { DeployButton } from './ConcatDeployButton';
-import { ConcatInteract } from './ConcatInteract';
+import { DeployButton } from './UserDeployButton';
+import { UserInteract } from './UserInteract';
 
-const contract_abi = require('../../../contracts/concat/concat_abi.json');
-const contract_bytecode = require('../../../contracts/concat/concat_bytecode.json');
+const contract_abi = require('../../../contracts/users/users_abi.json');
+const contract_bytecode = require('../../../contracts/users/users_bytecode.json');
 
 //TODO loop on all the acocunts to fill all the balances
 export async function updateBalances(accounts, setAccountBalances) {
@@ -22,7 +22,7 @@ export async function updateBalances(accounts, setAccountBalances) {
     }
 }
 
-export function ContractConcatContent({accountsAddresses}) {
+export function ContractUser({accountsAddresses}) {
     const [accountBalances, setAccountBalances] = useState(null);
     const [spinner, setSpinner] = useState(false);
     const [isContractDeployed, setIsContractDeployed] = useState(false);
@@ -37,7 +37,7 @@ export function ContractConcatContent({accountsAddresses}) {
     async function handleClick(event) {
         setSpinner(true);
         setContract(await new window.web3.eth.Contract(contract_abi).deploy(
-            {data : contract_bytecode.object, arguments: ['Easter', 'Egg']}
+            {data : contract_bytecode.object, arguments: null}
         ).send({from: accounts[0], gas: '1000000'}));
         setIsContractDeployed(true);
         setSpinner(false);
@@ -54,7 +54,7 @@ export function ContractConcatContent({accountsAddresses}) {
                 :
                 <DeployButton handleClick={handleClick}/>
             }
-
+    
             <AccountsArray
                 spinner={spinner}
                 addresses={accounts}
@@ -62,7 +62,7 @@ export function ContractConcatContent({accountsAddresses}) {
             />
 
             { isContractDeployed ?
-                <ConcatInteract
+                <UserInteract
                     contract={contract}
                     accounts={accounts}
                     setSpinner={setSpinner}

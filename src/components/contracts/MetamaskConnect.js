@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../css/MetamaskConnect.css';
 
-import { ContractConcatContent } from './concat/ConcatContract';
+import { ContractUser } from './user/UserContract';
 
 import Web3 from 'web3';
 
@@ -18,12 +18,12 @@ function connectToMetamask(window, setCurrentAccount) {
     }
 }
 
-export function ContractConcat() {
+export function MetamaskHandling() {
     const [currentAccount, setCurrentAccount] = useState(null);
 
     useEffect(() => connectToMetamask(window, setCurrentAccount), []);
 
     return (
-        currentAccount ? <ContractConcatContent accountsAddresses={currentAccount}/> : null
+        currentAccount ? <ContractUser accountsAddresses={currentAccount}/> : null
     );
 }

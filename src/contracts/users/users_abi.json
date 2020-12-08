@@ -1,0 +1,55 @@
+[
+	{
+		"inputs": [],
+		"name": "getUser",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "firstname",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "lastname",
+						"type": "string"
+					},
+					{
+						"internalType": "string[]",
+						"name": "fields",
+						"type": "string[]"
+					}
+				],
+				"internalType": "struct Users.User",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_firstname",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_lastname",
+				"type": "string"
+			},
+			{
+				"internalType": "string[]",
+				"name": "_fields",
+				"type": "string[]"
+			}
+		],
+		"name": "registerUser",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
