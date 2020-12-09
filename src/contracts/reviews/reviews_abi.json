@@ -1,0 +1,142 @@
+[
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_reviewId",
+                "type": "uint256"
+                
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "string",
+                        "name": "comment",
+                        "type": "string"
+                        
+                    },
+                    {
+                        "internalType": "int256",
+                        "name": "page",
+                        "type": "int256"
+                        
+                    },
+                    {
+                        "internalType": "int256",
+                        "name": "line",
+                        "type": "int256"
+                        
+                    }
+                    
+                ],
+                "internalType": "struct Reviews.ChangeRequest[]",
+                "name": "_requests",
+                "type": "tuple[]"
+                
+            }
+            
+        ],
+        "name": "addChangeRequestToReview",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+        
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_comment",
+                "type": "string"
+                
+            },
+            {
+                "internalType": "int256",
+                "name": "_page",
+                "type": "int256"
+                
+            },
+            {
+                "internalType": "int256",
+                "name": "_line",
+                "type": "int256"
+                
+            }
+            
+        ],
+        "name": "createChangeRequest",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "string",
+                        "name": "comment",
+                        "type": "string"
+                        
+                    },
+                    {
+                        "internalType": "int256",
+                        "name": "page",
+                        "type": "int256"
+                        
+                    },
+                    {
+                        "internalType": "int256",
+                        "name": "line",
+                        "type": "int256"
+                        
+                    }
+                    
+                ],
+                "internalType": "struct Reviews.ChangeRequest",
+                "name": "",
+                "type": "tuple"
+                
+            }
+            
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+        
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "enum Reviews.ReviewStatus",
+                "name": "_status",
+                "type": "uint8"
+                
+            }
+            
+        ],
+        "name": "createReview",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "enum Reviews.ReviewStatus",
+                        "name": "status",
+                        "type": "uint8"
+                        
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "id",
+                        "type": "uint256"
+                        
+                    }
+                    
+                ],
+                "internalType": "struct Reviews.Review",
+                "name": "",
+                "type": "tuple"
+                
+            }
+            
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+        
+    }
+    
+]
