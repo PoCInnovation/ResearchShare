@@ -1,5 +1,8 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
+const fs = require('fs');
+const replace = require('replace-in-file');
+require('dotenv').config({path: './env'});
 
 const provider = new HDWalletProvider(
 	'envelope peace hospital average rocket island warfare puppy thank rabbit board harvest',
@@ -23,10 +26,14 @@ const contract = require('../src/contracts/users/users.json').contracts["Users.s
 			from: accounts[0],
 			gas: '1000000'
 		});
-
-    	console.log(
-            `Contract deployed at address: ${deployedContract.options.address}`
-        );
-
-        provider.engine.stop();
+    console.log(
+        `Contract deployed at address: ${deployedContract.options.address}`
+    );
+    const contract_address_replacer = new RegExp('REACT_APP_CONTRACT_ADDRESS=.*');
+    replace.sync({
+        files: '.env',
+        from: contract_address_replacer,
+        to: 'REACT_APP_CONTRACT_ADDRESS=' + deployedContract.options.address
+    })
+    provider.engine.stop();
 })();

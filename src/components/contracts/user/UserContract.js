@@ -7,21 +7,21 @@ import { UserInteract } from './UserInteract';
 
 const users_contract = require('../../../contracts/users/users.json').contracts["Users.sol"].Users;
 
-async function loadContract(setContract, setSpinner) {
+async function loadContract(address, setContract, setSpinner) {
     setSpinner(true);
-    const contract = await new window.web3.eth.Contract(users_contract.abi, '0x82F1a3c8b3f5FBc867EeC47Dd3Ae0B9D6d68924a');
+    const contract = await new window.web3.eth.Contract(users_contract.abi, address);
     await setContract(contract);
     setSpinner(false);
 }
 
 export function ContractUser({accountsAddresses}) {
     const [spinner, setSpinner] = useState(false);
-
     const [contract, setContract] = useState(null);
-    const accounts = [accountsAddresses];
 
+    const accounts = [accountsAddresses];
     useEffect(() => {
-        loadContract(setContract, setSpinner);
+        loadContract(process.env.REACT_APP_CONTRACT_ADDRESS, setContract, setSpinner);
+        console.log(process.env);
     }, []);
 
     return (
