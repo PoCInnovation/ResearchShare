@@ -21,7 +21,6 @@ export function ContractUser({accountsAddresses}) {
     const accounts = [accountsAddresses];
     useEffect(() => {
         loadContract(process.env.REACT_APP_CONTRACT_ADDRESS, setContract, setSpinner);
-        console.log(process.env);
     }, []);
 
     return (
