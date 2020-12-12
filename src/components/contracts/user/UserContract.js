@@ -5,11 +5,11 @@ import PulseLoader from 'react-spinners/PulseLoader';
 
 import { UserInteract } from './UserInteract';
 
-const contract_abi = require('../../../contracts/users/users_abi.json');
+const users_contract = require('../../../contracts/users/users.json').contracts["Users.sol"].Users;
 
 async function loadContract(setContract, setSpinner) {
     setSpinner(true);
-    const contract = await new window.web3.eth.Contract(contract_abi, '0xdA266cfaa6663BbAAc6a60aF26507874Da4bdA13');
+    const contract = await new window.web3.eth.Contract(users_contract.abi, '0x82F1a3c8b3f5FBc867EeC47Dd3Ae0B9D6d68924a');
     await setContract(contract);
     setSpinner(false);
 }

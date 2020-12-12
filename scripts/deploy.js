@@ -7,17 +7,16 @@ const provider = new HDWalletProvider(
 );
 const web3 = new Web3(provider);
 
-const contract_abi = require('./src/contracts/users/users_abi.json');
-const contract_bytecode = require('./src/contracts/users/users_bytecode.json');
+const contract = require('../src/contracts/users/users.json').contracts["Users.sol"].Users;
 
 (async () => {
     const accounts = await web3.eth.getAccounts();
 
     console.log(`Attempting to deploy from account: ${accounts[0]}`);
 
-    const deployedContract = await new web3.eth.Contract(contract_abi)
+    const deployedContract = await new web3.eth.Contract(contract.abi)
 		.deploy({
-			data: contract_bytecode.object,
+			data: contract.evm.bytecode.object,
 			arguments: null
 		})
 		.send({
