@@ -1,7 +1,5 @@
 #ConcatContract {
-    float: left;
-    width: 20%;
-    margin-left: 5%;
+    width: 400px;
     border-width: 1px;
     border-style: solid;
     border-color: black;

@@ -47,10 +47,10 @@ function downloadButtonWithContent({base, content}) {
     return (
         <div className="DownloadButtonWithContent">
             {base}
-            <div id="success">
             <br/>
-            <div className={"FileContent"}>{content}</div>
-            </div>
+            <br/>
+            <h2>File Content: </h2><br/>
+            <div className="FileContent">{content}</div>
         </div>
     )
 }
@@ -78,7 +78,7 @@ export function DownloadButton({ipfs}) {
 
     const base = downloadButtonBase({inputOnChange, buttonOnClick});
     return (
-        <div id="upload">
+        <div id="download">
             {!content ? base : downloadButtonWithContent({base, content})}
         </div>
     );

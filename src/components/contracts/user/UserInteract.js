@@ -66,15 +66,16 @@ export function UserInteract({contract, accounts, setSpinner}) {
                         onChange={(e) => setUserInfos({...userInfos, familyName: e.target.value})}/>
                 </div>
                 <br/>
-                <Button onClick={handleClickRegisterUser} variant="contained" color="primary">
+                <br/>
+                <Button className="button" color="primary" variant="contained"
+                    onClick={handleClickRegisterUser}>
                     Sign Up
                 </Button>
             </div>
-            <p><br/></p>
-            <p><br/></p>
+            <br/><br/>
             <div>
                 {!user ?
-                    <Button className="lastButton" color="primary" variant="contained"
+                    <Button className="button" color="primary" variant="contained"
                         onClick={handleClickGetUser}>
                         GET USER
                     </Button>

@@ -1,12 +1,9 @@
 #download {
-    margin-left: 10%;
-    margin-right: 10%;
     margin-top: 10%;
-    height: 40%;
 }
 
 #download_input {
-    width: 40%;
+    width: 50%;
     float: left;
 }
 

@@ -1,5 +1,15 @@
 .App {
   text-align: center;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#wrapper {
+  display: flex;
+}
+
+.left, .right {
+  flex: 1;
 }
 
 .FileContent {
