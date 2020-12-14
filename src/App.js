@@ -8,8 +8,11 @@ function App() {
     return (
         <div className="App">
             <h1>Research Share</h1>
-            <MetamaskHandling/>
-            <IpfsHandling/>
+            <div id="wrapper">
+                <div className="left"><MetamaskHandling/></div>
+                <IpfsHandling/>
+                <div className="right"></div>
+            </div>
         </div>
     );
 }

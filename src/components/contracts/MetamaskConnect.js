@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import '../../css/MetamaskConnect.css';
 
 import { ContractUser } from './user/UserContract';
 

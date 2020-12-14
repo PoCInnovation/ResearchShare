@@ -53,7 +53,7 @@ function getFileContent(file, setFileContent) {
  */
 function uploadButtonBase({inputOnChange, buttonOnClick}) {
     return (
-        <div id="upload" className="UploadButtonBase">
+        <div id="upload">
             <input id="upload_input" onChange={inputOnChange} type="file"/>
             <Button id="upload_button" onClick={buttonOnClick} variant="contained" color="primary">
                 Upload
@@ -74,8 +74,7 @@ function uploadButtonWithHash({base, fileHash}) {
         <div className="UploadButtonWithHash">
             {base}
             <br/>
-            {'Success: ' + fileHash}
-            <br/>
+            <div id="success">{'Success: ' + fileHash}</div>
         </div>
     )
 }
