@@ -1,5 +1,14 @@
+#upload {
+    display: flex;
+    justify-content: space-between;
+}
+
+#upload:last-child {
+    margin-left: auto;
+}
+
 #success {
-    margin-top: 10%;
+    text-align: center;
 }
 
 #upload_input {

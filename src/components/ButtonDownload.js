@@ -19,43 +19,6 @@ async function downloadFromIPFS(ipfs, hash, setContent) {
 }
 
 /**
- * Component Function which create a basic download button with a text input.
- * It's used by {@link DownloadButton}.
- * @param inputOnChange {callback} - Function to be called when a file is selected via the input.
- * @param buttonOnClick {callback} - Function to be called when the button is pressed.
- * @returns {JSX.Element}
- */
-function  downloadButtonBase({inputOnChange, buttonOnClick})  {
-    return (
-        <div className="DownloadButtonBase">
-            <input id="download_input" onChange={inputOnChange} type="text" name="HashField"/>
-            <Button id="download_button" onClick={buttonOnClick} variant="contained" color="primary">
-                Download
-            </Button>
-        </div>
-    );
-}
-
-/**
- * Component Function which adds content downloaded to a base button.
- * It's used by {@link DownloadButton}.
- * @param base {JSX.Element} - Basic download button.
- * @param content {string} - Content of the file, obtained via the its download
- * @returns {JSX.Element}
- */
-function downloadButtonWithContent({base, content}) {
-    return (
-        <div className="DownloadButtonWithContent">
-            {base}
-            <br/>
-            <br/>
-            <h2>File Content: </h2><br/>
-            <div className="FileContent">{content}</div>
-        </div>
-    )
-}
-
-/**
  *  Component Function used to retrieve a file from IPFS based on user's input.
  *  Test hash: QmPKby2sr2fxeEpxeGVuevGsvSVd1Hs37JBR9QSuWrvzuV -- my_world file from Alex & Theo
  * @param ipfs - IPFS Client.
@@ -68,18 +31,28 @@ export function DownloadButton({ipfs}) {
     //       Font: Provide way to input either hash or filename
     //             || Find way to differentiate filename & hash base on input
     const [hash, setHash] = React.useState("");
-    const inputOnChange = (event) => setHash(event.target.value);
-
     const [content, setContent] = React.useState("");
+
+    const inputOnChange = (event) => setHash(event.target.value);
     const buttonOnClick = async () => {
         // TODO: add error handling if hash empty
         await downloadFromIPFS(ipfs, hash, setContent);
     };
 
-    const base = downloadButtonBase({inputOnChange, buttonOnClick});
     return (
-        <div id="download">
-            {!content ? base : downloadButtonWithContent({base, content})}
+        <div>
+            <div id="download">
+                <input id="download_input" onChange={inputOnChange} type="text" name="HashField"/>
+                <Button id="download_button" onClick={buttonOnClick} variant="contained" color="primary" size="small">
+                    Download
+                </Button>
+            </div>
+            { content ?
+                <div className="FileContent">
+                    <br/><br/><h2>File Content: </h2><br/>
+                    {content}
+                </div>
+            : null }
         </div>
     );
 }

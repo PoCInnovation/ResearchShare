@@ -1,5 +1,10 @@
 #download {
-    margin-top: 10%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#download:last-child {
+    margin-left: auto;
 }
 
 #download_input {

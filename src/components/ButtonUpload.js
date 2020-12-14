@@ -45,41 +45,6 @@ function getFileContent(file, setFileContent) {
 }
 
 /**
- * Component Function which create a basic upload button with a file input.
- * It's used by {@link UploadButton}.
- * @param inputOnChange {callback} - Function to be called when a file is selected via the input.
- * @param buttonOnClick {callback} - Function to be called when the button is pressed.
- * @returns {JSX.Element}
- */
-function uploadButtonBase({inputOnChange, buttonOnClick}) {
-    return (
-        <div id="upload">
-            <input id="upload_input" onChange={inputOnChange} type="file"/>
-            <Button id="upload_button" onClick={buttonOnClick} variant="contained" color="primary">
-                Upload
-            </Button>
-        </div>
-    );
-}
-
-/**
- * Component Function which adds the status of the upload & the hash obtained to a base button.
- * It's used by {@link UploadButton}.
- * @param base {JSX.Element} - Basic upload button.
- * @param fileHash {string} - Hash of the file, obtained via its upload.
- * @returns {JSX.Element}
- */
-function uploadButtonWithHash({base, fileHash}) {
-    return (
-        <div className="UploadButtonWithHash">
-            {base}
-            <br/>
-            <div id="success">{'Success: ' + fileHash}</div>
-        </div>
-    )
-}
-
-/**
  * Component Function used to retrieve a file from the user's machine & upload it to IPFS.
  * @param ipfs - IPFS Client.
  * @returns {JSX.Element}
@@ -88,19 +53,29 @@ function uploadButtonWithHash({base, fileHash}) {
 export function UploadButton({ipfs}) {
     const [filename, setFilename] = React.useState("");
     const [fileContent, setFileContent] = React.useState("");
+    const [fileHash, setFileHash] = React.useState("");
 
     const inputOnChange = (event) => {
         extractFilename(event.target.value, setFilename);
         getFileContent(event.target.files[0], setFileContent);
     };
 
-    const [fileHash, setFileHash] = React.useState("");
     const buttonOnClick = async () => {
         // TODO: add error handling if fname & fcontent empty
         await uploadToIPFS(ipfs, fileContent, setFileHash);
         callSmartContract(fileHash, filename);
     };
 
-    const base = uploadButtonBase({inputOnChange, buttonOnClick});
-    return !fileHash ? base : uploadButtonWithHash({base, fileHash});
+    return (
+        <div>
+            <div id="upload">
+                <input id="upload_input" onChange={inputOnChange} type="file"/>
+                <Button id="upload_button" onClick={buttonOnClick} variant="contained" color="primary" size="small">
+                    Upload
+                </Button>
+            </div>
+            <br/>
+            {fileHash ? <div id="success">{'Success: ' + fileHash}</div> : null}
+        </div>
+    );
 }
