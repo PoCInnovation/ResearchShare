@@ -28,7 +28,7 @@ export function UserInteract({contract, accounts, setSpinner}) {
     const [field, setField] = useState('');
     const [user, setUser] = useState(null);
 
-    const handleClickRegisterUser = (e) => {
+    const handleClickRegisterUser = () => {
         contractCaller(
             () => registerUser(contract, accounts, userInfos),
             accounts,
@@ -52,13 +52,13 @@ export function UserInteract({contract, accounts, setSpinner}) {
         )
     }
 
-    const handleClickAddField = (e) => {
+    const handleClickAddField = () => {
         if (userInfos.fields[0] == null) {
             setUserInfos({...userInfos, fields: [field]});
         } else {
             setUserInfos({...userInfos, fields: [...userInfos.fields, field]});
         }
-        setField('');
+        setField('')
     }
 
     return (
@@ -88,11 +88,13 @@ export function UserInteract({contract, accounts, setSpinner}) {
                         </Button>
                     </div>
                     <br/>
+                    { userInfos.fields[0] != null ?
                     <ul id="list">
                         {userInfos.fields.map((value, index) => {
                             return <li key={index}>{value}</li>
                         })}
                     </ul>
+                    : null }
                 </div>
                 <br/>
                 <br/>
