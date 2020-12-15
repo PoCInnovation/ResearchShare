@@ -70,7 +70,7 @@ export function UploadButton({ipfs}) {
         <div>
             <div id="upload">
                 <input id="upload_input" onChange={inputOnChange} type="file"/>
-                <Button id="upload_button" onClick={buttonOnClick} variant="contained" color="primary" size="small">
+                <Button id="upload_button" onClick={buttonOnClick} variant="contained" color="primary">
                     Upload
                 </Button>
             </div>

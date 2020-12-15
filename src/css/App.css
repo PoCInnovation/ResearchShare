@@ -10,9 +10,9 @@
   overflow-wrap: break-word;
 }
 
-.left, .right { width: 25%;}
+.left, .right { width: 25%; }
 
-.center { width: 35%;}
+.center { width: 35%; }
 
 .FileContent {
   white-space: pre-wrap;

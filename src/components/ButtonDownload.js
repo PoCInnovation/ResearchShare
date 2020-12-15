@@ -43,7 +43,7 @@ export function DownloadButton({ipfs}) {
         <div>
             <div id="download">
                 <input id="download_input" onChange={inputOnChange} type="text" name="HashField"/>
-                <Button id="download_button" onClick={buttonOnClick} variant="contained" color="primary" size="small">
+                <Button id="download_button" onClick={buttonOnClick} variant="contained" color="primary">
                     Download
                 </Button>
             </div>

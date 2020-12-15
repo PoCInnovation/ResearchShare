@@ -1,6 +1,7 @@
 #upload {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 #upload:last-child {
