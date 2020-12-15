@@ -6,11 +6,13 @@
 
 #wrapper {
   display: flex;
+  justify-content: space-between;
+  overflow-wrap: break-word;
 }
 
-.left, .right {
-  flex: 1;
-}
+.left, .right { width: 25%;}
+
+.center { width: 35%;}
 
 .FileContent {
   white-space: pre-wrap;
