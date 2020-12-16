@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { ContractUser } from './user/UserContract';
+import { ContractUser } from '../user/UserContract';
 
 import Web3 from 'web3';
 

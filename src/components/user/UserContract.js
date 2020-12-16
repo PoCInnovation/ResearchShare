@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import '../../../css/UserContract.css';
+import './UserContract.css';
 
 import PulseLoader from 'react-spinners/PulseLoader';
 
 import { UserInteract } from './UserInteract';
 
-const users_contract = require('../../../contracts/users/users.json').contracts["Users.sol"].Users;
+const users_contract = require('../../contracts/users/users.json').contracts["Users.sol"].Users;
 
 async function loadContract(address, setContract, setSpinner) {
     setSpinner(true);

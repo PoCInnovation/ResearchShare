@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../../css/UserInteract.css';
+import './UserInteract.css';
 
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
