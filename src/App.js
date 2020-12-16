@@ -10,7 +10,7 @@ function App() {
             <h1>Research Share</h1>
             <div id="wrapper">
                 <div className="left"><MetamaskHandling/></div>
-                <IpfsHandling/>
+                <div className="center"><IpfsHandling/></div>
                 <div className="right"></div>
             </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../../../css/UserInteract.css';
 
 import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import Input from '@material-ui/core/Input';
 
 async function registerUser(contract, accounts, userInfos) {
@@ -23,16 +24,17 @@ export async function contractCaller(contractFunction, accounts, setSpinner) {
 }
 
 export function UserInteract({contract, accounts, setSpinner}) {
-    const [userInfos, setUserInfos] = useState({firstName: '', familyName: '', fields: ['developer', 'scientist']});
+    const [userInfos, setUserInfos] = useState({firstName: '', familyName: '', fields: [null]});
+    const [field, setField] = useState('');
     const [user, setUser] = useState(null);
 
-    const handleClickRegisterUser = (e) => {
+    const handleClickRegisterUser = () => {
         contractCaller(
             () => registerUser(contract, accounts, userInfos),
             accounts,
             setSpinner
         )
-        setUserInfos({firstName: '', familyName: ''});
+        setUserInfos({firstName: '', familyName: '', fields: [null]});
     }
 
     const handleClickGetUser = () => {
@@ -50,6 +52,15 @@ export function UserInteract({contract, accounts, setSpinner}) {
         )
     }
 
+    const handleClickAddField = () => {
+        if (userInfos.fields[0] == null) {
+            setUserInfos({...userInfos, fields: [field]});
+        } else {
+            setUserInfos({...userInfos, fields: [...userInfos.fields, field]});
+        }
+        setField('')
+    }
+
     return (
         <React.Fragment>
             <br/>
@@ -64,6 +75,26 @@ export function UserInteract({contract, accounts, setSpinner}) {
                     <p>Family Name:</p>
                     <Input className="stringInputs" type="text" value={userInfos.familyName}
                         onChange={(e) => setUserInfos({...userInfos, familyName: e.target.value})}/>
+                </div>
+                <br/>
+                <div>
+                    <p>Fields:</p>
+                    <div id="fields">
+                        <Input className="input_field" type="text" value={field}
+                            onChange={(e) => setField(e.target.value)} />
+                        <Button className="button_field" color="primary" variant="contained"
+                            onClick={handleClickAddField}>
+                            <AddIcon/>
+                        </Button>
+                    </div>
+                    <br/>
+                    { userInfos.fields[0] != null ?
+                    <ul id="list">
+                        {userInfos.fields.map((value, index) => {
+                            return <li key={index}>{value}</li>
+                        })}
+                    </ul>
+                    : null }
                 </div>
                 <br/>
                 <br/>
