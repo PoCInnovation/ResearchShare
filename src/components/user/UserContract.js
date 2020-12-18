@@ -5,7 +5,7 @@ import PulseLoader from 'react-spinners/PulseLoader';
 
 import { UserInteract } from './UserInteract';
 
-const users_contract = require('../../contracts/users/users.json').contracts["Users.sol"].Users;
+const users_contract = require('../../contracts/god.json').contracts["users.sol"].Users;
 
 async function loadContract(address, setContract, setSpinner) {
     setSpinner(true);
