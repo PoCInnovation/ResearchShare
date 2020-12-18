@@ -24,7 +24,7 @@ const contract = require('../src/contracts/god.json').contracts["researchShare.s
 		})
 		.send({
 			from: accounts[0],
-			gas: '1000000'
+			gas: '2000000'
 		});
     console.log(
         `Contract deployed at address: ${deployedContract.options.address}`
