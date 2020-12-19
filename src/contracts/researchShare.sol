@@ -2,9 +2,9 @@
 pragma solidity ^0.7.4;
 pragma experimental ABIEncoderV2;
 
-import "users.sol";
-import "submits.sol";
-import "papers.sol";
+import "./users.sol";
+import "./submits.sol";
+import "./papers.sol";
 
 contract ResearchShare is Users, Submits, Papers {
     /**

@@ -10,7 +10,7 @@ const provider = new HDWalletProvider(
 );
 const web3 = new Web3(provider);
 
-const contract = require('../src/contracts/users/users.json').contracts["Users.sol"].Users;
+const contract = require('../src/contracts/god.json').contracts["researchShare.sol"].ResearchShare;
 
 (async () => {
     const accounts = await web3.eth.getAccounts();
@@ -24,7 +24,7 @@ const contract = require('../src/contracts/users/users.json').contracts["Users.s
 		})
 		.send({
 			from: accounts[0],
-			gas: '1000000'
+			gas: '2000000'
 		});
     console.log(
         `Contract deployed at address: ${deployedContract.options.address}`

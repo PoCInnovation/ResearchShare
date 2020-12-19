@@ -2,7 +2,7 @@
 pragma solidity ^0.7.4;
 pragma experimental ABIEncoderV2;
 
-import "reviews.sol";
+import "./reviews.sol";
 
 /**
  * A Submit corresponds to a proposal of Paper so we use the Paper's IPFS hash,
