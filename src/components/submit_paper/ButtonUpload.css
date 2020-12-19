@@ -1,0 +1,21 @@
+#upload {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#upload:last-child {
+    margin-left: auto;
+}
+
+#success {
+    text-align: center;
+}
+
+#upload_input {
+    width: 55%;
+}
+
+#upload_button {
+    width: 40%;
+}

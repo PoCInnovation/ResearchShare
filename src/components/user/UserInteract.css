@@ -1,0 +1,38 @@
+.stringInputs {
+    width: 200px;
+    max-width: 100%;
+}
+
+.button {
+    width: 150px;
+    max-width: 100%;
+}
+
+#fields {
+    max-width: 100%;
+}
+
+.input_field {
+    width: 150px;
+}
+
+.button_field {
+    width: 50px;
+}
+
+#list {
+    margin-left: 10%;
+    text-align: left;
+}
+
+#input_field {
+    width: 200px;
+}
+
+#button_field {
+    max-width: 100%;
+}
+
+.fields > ul {
+    text-align: left;
+}

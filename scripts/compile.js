@@ -5,8 +5,20 @@ const path = require('path');
 const input = {
 	language: 'Solidity',
 	sources: {
-		'Users.sol' : {
-			content: fs.readFileSync('./src/contracts/users/users.sol', 'utf8')
+		'researchShare.sol' : {
+			content: fs.readFileSync('./src/contracts/researchShare.sol', 'utf8')
+		},
+		'users.sol' : {
+			content: fs.readFileSync('./src/contracts/users.sol', 'utf8')
+		},
+		'papers.sol' : {
+			content: fs.readFileSync('./src/contracts/papers.sol', 'utf8')
+		},
+		'submits.sol' : {
+			content: fs.readFileSync('./src/contracts/submits.sol', 'utf8')
+		},
+		'reviews.sol' : {
+			content: fs.readFileSync('./src/contracts/reviews.sol', 'utf8')
 		}
 	},
 	settings: {
@@ -22,7 +34,7 @@ const input = {
 	const compiledContract = JSON.parse(solc.compile(JSON.stringify(input)));
 
 	fs.writeJsonSync(
-		'./src/contracts/users/users.json',
+		'./src/contracts/god.json',
 		compiledContract,
 		{
 			spaces: 2

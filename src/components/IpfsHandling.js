@@ -1,8 +1,8 @@
 import React from 'react';
 import ipfsClient from 'ipfs-http-client';
 
-import { UploadButton } from './ButtonUpload';
-import { DownloadButton } from './ButtonDownload';
+import { UploadButton } from './submit_paper/ButtonUpload';
+import { DownloadButton } from './download_paper/ButtonDownload';
 
 const ipfs = ipfsClient(
     {
@@ -14,9 +14,9 @@ const ipfs = ipfsClient(
 
 export function IpfsHandling() {
     return (
-      <div>
+      <div id="ipfsHandling">
         <UploadButton ipfs={ipfs}/>
-        <br/>
+        <br/><br/>
         <DownloadButton ipfs={ipfs}/>
       </div>
     );

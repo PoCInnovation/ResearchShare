@@ -1,0 +1,16 @@
+#download {
+    display: flex;
+    justify-content: space-between;
+}
+
+#download:last-child {
+    margin-left: auto;
+}
+
+#download_input {
+    width: 50%;
+}
+
+#download_button {
+    width: 40%;
+}
