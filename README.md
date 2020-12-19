@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ResearchShare
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+ResearchShare is a platform where you can store research papers for free on IPFS network, with a blockchain evaluation proof.
 
-### `npm start`
+You can find the motives [here](/doc/why/Why.md). One of them is to be transparent therefore you can find informations about everything [here](/doc)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Stack
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  - [IPFS](https://ipfs.io/), used to store the research papers as a mean to [decentralize the information](/doc/why/Why.md).
+  - [ReactJS](https://reactjs.org/)
+  
+### Used for prototyping
 
-### `npm test`
+  - [Solidity](https://soliditylang.org/), due to the current state of the [Ethereum](https://ethereum.org/en/) blockchain
+      ([*v2 is underway*](https://consensys.net/blog/blockchain-explained/what-is-ethereum-2/), costs a lot, ...)
+      the final version of the platform will surely use another blockchain & smart contract language.
+  
+### Used for testing
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - [TruffleSuite](https://www.trufflesuite.com/ganache)
 
-### `npm run build`
+## What's been done
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - [Draft of the Validation Procces](/doc/v1/ValidationProcess).
+  - [Draft of the Contracts](/doc/v1/Contracts).
+  - Upload a file to IPFS & save its hash to later retrieve it.
+  - Begin the implementations of the contracts.
+  - User registration (linked the to the contracts)
+  - Begin the creation of the platform
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## What's next
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### In the next iteration
+  
+  - Complete the contracts
+  - Test everything
+  - Finish the documentation
+  - Improve the frontend
 
-### `npm run eject`
+### Predicted
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  - Determine what blockchain to use
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contributors
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+ - [Alexandre Chetrit](https://github.com/chetrit)
+ - [Matthis Cusin](https://github.com/Basilarc)
+ - [Quentin Veyrenc](https://github.com/VrncQuentin)
