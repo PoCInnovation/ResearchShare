@@ -114,7 +114,11 @@ export function UserInteract({contract, accounts, setSpinner}) {
                     <React.Fragment>
                         <p>FirstName: {user[0]}</p>
                         <p>FamilyName: {user[1]}</p>
-                        <p>Fields: {user[2][0] + ', ' + user[2][1]}</p>
+                        <p>Fields:&nbsp;
+                            {user[2].map((value, index) => {
+                                return value.concat(index !== user[2].length - 1 ? ', ' : '')
+                            })}
+                        </p>
                     </React.Fragment>
                 }
             </div>
