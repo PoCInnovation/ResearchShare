@@ -2,12 +2,10 @@ FROM node:latest
 
 WORKDIR /usr/src/app
 
-COPY package.json .
-
-RUN apt-get install git
-
 COPY . .
+
+RUN npm install
 
 CMD ["npm", "start"]
 
-EXPOSE 80
+EXPOSE 3000
