@@ -11,6 +11,9 @@ services:
   
   ganache:
     image: trufflesuite/ganache-cli:v6.12.1
+    command: "ganash-cli --db /app/db --chainId 1337"
+    volumes:
+      - ganache-db:/app/db
     ports: 
       - 8545:8545
     networks:
@@ -20,3 +23,6 @@ services:
 networks:
     rpc-tier:
       driver: bridge
+
+volumes:
+  ganache-db:
