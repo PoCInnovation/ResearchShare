@@ -11,7 +11,7 @@ services:
   
   ganache:
     image: trufflesuite/ganache-cli:v6.12.1
-    command: "ganash-cli --db /app/db --chainId 1337 --networkId 1234"
+    command: 'ganash-cli --db /app/db --chainId 1337 --networkId 1234 --account="0xe39c22ec859238b22a03b090a06b35185e2013f8c6ebbe50a7d112a391f421a7,9999999999999999999999999999999999999999"'
     volumes:
       - ganache-db:/app/db
     ports: 
