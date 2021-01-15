@@ -1,6 +1,6 @@
 const ResearchShare = artifacts.require("ResearchShare")
 
-contract("ResearchShare", (accounts) => {
+contract("Paper", (accounts) => {
     let instance = {};
     before(async () => {
         instance = await ResearchShare.deployed();
@@ -8,8 +8,6 @@ contract("ResearchShare", (accounts) => {
     });
     it('User creation', async () => {
         let user = await instance.getUser()
-        console.log("fields :")
-        console.log(user.fields)
         assert.equal(user.firstname, "John", "Invalid user firstname")
         assert.equal(user.lastname, "Doe", "Invalid user lastname")
         assert.equal(user.fields.length, 3, "Found unexpected field(s)")
