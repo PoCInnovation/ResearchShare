@@ -4,7 +4,7 @@ contract("Paper", (accounts) => {
     let instance = {};
     before(async () => {
         instance = await ResearchShare.deployed();
-        await instance.registerUser("John", "Doe", ["spy", "murder", "poison"])
+        await instance.Add("John", "Doe", ["spy", "murder", "poison"])
     });
     it('User creation', async () => {
         let user = await instance.getUser()
