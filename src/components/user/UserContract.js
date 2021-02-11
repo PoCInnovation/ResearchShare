@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+ import React, { useState, useEffect } from 'react';
 import './UserContract.css';
 
 import PulseLoader from 'react-spinners/PulseLoader';

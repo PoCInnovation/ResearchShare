@@ -10,6 +10,9 @@ import './ButtonUpload.css';
  * @returns {Promise<void>}
  */
 async function uploadToIPFS(ipfs, fileContent, setFileHash) {
+    if (!ipfs || !fileContent) {
+        return;
+    }
     const result = await ipfs.add(fileContent);
     setFileHash(result.path);
 }

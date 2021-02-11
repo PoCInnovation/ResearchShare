@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './UserInteract.css';
 
 import Button from '@material-ui/core/Button';
@@ -42,7 +42,6 @@ export function UserInteract({contract, accounts, setSpinner}) {
             async () => {
                 await getCurrentUser(contract, accounts).then((value) => {
                     setUser(value);
-                    console.log(value);
                     setSpinner(false);
                 });
                 return (user);
@@ -68,38 +67,38 @@ export function UserInteract({contract, accounts, setSpinner}) {
                 <div>
                     <p>First Name:</p>
                     <Input className="stringInputs" type="text" value={userInfos.firstName}
-                        onChange={(e) => setUserInfos({...userInfos, firstName: e.target.value})}/>
+                           onChange={(e) => setUserInfos({...userInfos, firstName: e.target.value})}/>
                 </div>
                 <br/>
                 <div>
                     <p>Family Name:</p>
                     <Input className="stringInputs" type="text" value={userInfos.familyName}
-                        onChange={(e) => setUserInfos({...userInfos, familyName: e.target.value})}/>
+                           onChange={(e) => setUserInfos({...userInfos, familyName: e.target.value})}/>
                 </div>
                 <br/>
                 <div>
                     <p>Fields:</p>
                     <div id="fields">
                         <Input className="input_field" type="text" value={field}
-                            onChange={(e) => setField(e.target.value)} />
+                               onChange={(e) => setField(e.target.value)}/>
                         <Button className="button_field" color="primary" variant="contained"
-                            onClick={handleClickAddField}>
+                                onClick={handleClickAddField}>
                             <AddIcon/>
                         </Button>
                     </div>
                     <br/>
-                    { userInfos.fields[0] != null ?
-                    <ul id="list">
-                        {userInfos.fields.map((value, index) => {
-                            return <li key={index}>{value}</li>
-                        })}
-                    </ul>
-                    : null }
+                    {userInfos.fields[0] != null ?
+                        <ul id="list">
+                            {userInfos.fields.map((value, index) => {
+                                return <li key={index}>{value}</li>
+                            })}
+                        </ul>
+                        : null}
                 </div>
                 <br/>
                 <br/>
                 <Button className="button" color="primary" variant="contained"
-                    onClick={handleClickRegisterUser}>
+                        onClick={handleClickRegisterUser}>
                     Sign Up
                 </Button>
             </div>
@@ -107,7 +106,7 @@ export function UserInteract({contract, accounts, setSpinner}) {
             <div>
                 {!user ?
                     <Button className="button" color="primary" variant="contained"
-                        onClick={handleClickGetUser}>
+                            onClick={handleClickGetUser}>
                         GET USER
                     </Button>
                     :
