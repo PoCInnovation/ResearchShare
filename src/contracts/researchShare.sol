@@ -8,6 +8,11 @@ import "./papers.sol";
 
 contract ResearchShare is Users, Submits, Papers {
 
+    event ReviewRequest(
+        string _ipfsHash,
+        address[] reviewers
+    );
+
     /**
      * Deprecated
      * Generate random number from date using keccak
@@ -29,6 +34,7 @@ contract ResearchShare is Users, Submits, Papers {
         address[] memory reviewers = findReviewers(_scope, _ipfsHash);
 
         addReviewers(submitId, reviewers);
+        emit ReviewRequest(_ipfsHash, reviewers);
         notifyReviewers(_ipfsHash, reviewers);
     }
 
@@ -44,21 +50,5 @@ contract ResearchShare is Users, Submits, Papers {
         uint rand_val = _generateRandomNum(0, potentialReviewers.length, _ipfsHash);
         reviewers[0] = (potentialReviewers[rand_val]);
         return (reviewers);
-    }
-
-    function findReviewer() private view returns (address) {
-
-    }
-
-    /**
-     * Sends notification to reviewers containing the paper's hash so they can review it.
-     *
-     * @param _ipfsHash  Hash of the submitted Paper.
-     * @param _reviewers List of the reviewers to be notified.
-     *
-     * TODO: Does it really have its place here?
-     *       Should "submitPaper" return the reviewers to the front so it can notify them?
-     **/
-    function notifyReviewers(string memory _ipfsHash, address[] memory _reviewers) private {
     }
 }
