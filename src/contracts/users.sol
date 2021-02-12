@@ -10,6 +10,7 @@ contract Users {
     }
 
     mapping (address => User) private users;
+    mapping (string => address[]) internal fieldToUser;
 
     function registerUser(string memory _firstname, string memory _lastname, string[] memory _fields) public {
         users[msg.sender] = User({
@@ -17,6 +18,7 @@ contract Users {
             lastname: _lastname,
             fields: _fields
         });
+        for (uint i = 0; i < _fields.length; i++) { fieldToUser[_fields[i]].push(msg.sender); }
     }
 
     function getUser() public view returns (User memory) {
