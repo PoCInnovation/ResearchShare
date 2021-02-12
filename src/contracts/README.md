@@ -51,4 +51,16 @@ truffle console
 
 *<u>N.B. :</u> truffle develop will run a new local blockchain instead of connect to the one we previously created*
 
-### Configure test account in [Metamask](https://metamask.io/)
+### Local created an account
+
+In order to make your life easier we created an account full of test ETH in our local blockchain. His credentials may be found in `\<repository root>/src/contracts/account.json`, or just below :
+
+
+
+
+```json
+key: "e39c22ec859238b22a03b090a06b35185e2013f8c6ebbe50a7d112a391f421a7",
+address: "0x1459ef1e422315b3772333E044F37BEed2FCeb02"
+```
+
+## Authors
