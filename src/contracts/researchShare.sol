@@ -35,7 +35,6 @@ contract ResearchShare is Users, Submits, Papers {
 
         addReviewers(submitId, reviewers);
         emit ReviewRequest(_ipfsHash, reviewers);
-        notifyReviewers(_ipfsHash, reviewers);
     }
 
     /**
