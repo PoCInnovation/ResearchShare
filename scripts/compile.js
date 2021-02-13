@@ -1,6 +1,5 @@
 const fs = require('fs-extra');
 const solc = require('solc');
-const path = require('path');
 
 const input = {
 	language: 'Solidity',
