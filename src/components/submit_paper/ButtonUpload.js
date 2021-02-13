@@ -10,9 +10,7 @@ import './ButtonUpload.css';
  * @returns {Promise<void>}
  */
 async function uploadToIPFS(ipfs, fileContent, setFileHash) {
-    if (!ipfs || !fileContent) {
-        return;
-    }
+    console.log(fileContent);
     const result = await ipfs.add(fileContent);
     setFileHash(result.path);
 }
@@ -36,6 +34,16 @@ function extractFilename(filepath, setFilename) {
     setFilename(result);
 }
 
+/*function getMetadataForFile(file) {
+    // Not supported in Safari for iOS.
+    const name = file.name ? file.name : 'NOT SUPPORTED';
+    // Not supported in Firefox for Android or Opera for Android.
+    const type = file.type ? file.type : 'NOT SUPPORTED';
+    // Unknown cross-browser support.
+    const size = file.size ? file.size : 'NOT SUPPORTED';
+    console.log({file, name, type, size});
+}*/
+
 /**
  * Creates a FileReader to read a file and use the setter to extract it.
  * @param file - File to retrieve the content from.
@@ -58,13 +66,14 @@ export function UploadButton({ipfs}) {
     const [fileContent, setFileContent] = React.useState("");
     const [fileHash, setFileHash] = React.useState("");
 
-    const inputOnChange = (event) => {
+    const inputOnChange = async (event) => {
         extractFilename(event.target.value, setFilename);
         getFileContent(event.target.files[0], setFileContent);
     };
 
     const buttonOnClick = async () => {
-        // TODO: add error handling if fname & fcontent empty
+        if (!filename || !fileContent || !ipfs)
+            return;
         await uploadToIPFS(ipfs, fileContent, setFileHash);
         callSmartContract(fileHash, filename);
     };

@@ -37,7 +37,8 @@ export function DownloadButton({ipfs}) {
         if (!hash)
             return;
         const data = await downloadFromIPFS(ipfs, hash);
-        fileDownload(data, 'test.txt');
+        const blob = new Blob([data]);
+        fileDownload(blob, 'test.txt');
     }
     const inputOnChange = (event) => setHash(event.target.value);
 
