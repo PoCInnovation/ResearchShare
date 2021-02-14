@@ -10,7 +10,7 @@ const provider = new HDWalletProvider(
 );
 const web3 = new Web3(provider);
 
-const contract = require('../src/contracts/god.json').contracts["researchShare.sol"].ResearchShare;
+const contract = require('../src/contracts/compiledContract.json').contracts["researchShare.sol"].ResearchShare;
 
 (async () => {
     const accounts = await web3.eth.getAccounts();
