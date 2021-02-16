@@ -16,7 +16,6 @@ const concat = require('it-concat')
 async function downloadFromIPFS(ipfs, hash) {
     const result = await all(ipfs.get(hash));
     const fileContent = await concat(result[0].content);
-    //console.log(fileContent.toString());
     return (fileContent);
 }
 
