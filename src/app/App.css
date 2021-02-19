@@ -14,15 +14,6 @@
 
 .center { width: 35%; }
 
-.FileContent {
-  white-space: pre-wrap;
-  text-align: left;
-}
-
-.FileContent > h2 {
-  text-align: center;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;

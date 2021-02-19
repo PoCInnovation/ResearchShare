@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  # app:
+  #   build: .
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - rpc-tier
+  #   restart: unless-stopped
+  
+  ganache:
+    image: trufflesuite/ganache-cli:v6.12.1
+    command: 'ganash-cli --db /app/db --chainId 1337 --networkId 1234 --account="0xe39c22ec859238b22a03b090a06b35185e2013f8c6ebbe50a7d112a391f421a7,9999999999999999999999999999999999999999"'
+    volumes:
+      - ganache-db:/app/db
+    ports: 
+      - 8545:8545
+    networks:
+      - rpc-tier
+    restart: unless-stopped
+
+networks:
+    rpc-tier:
+      driver: bridge
+
+volumes:
+  ganache-db:

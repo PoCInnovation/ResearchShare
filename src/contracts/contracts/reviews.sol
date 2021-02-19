@@ -25,18 +25,19 @@ contract Reviews {
 
 
     /**
-     * Create a review and returns it's id so the front can possibly add ChangeRequests
+     * Create a review and adds all the change requests to it.
      *
-     * @param _status   what the reviewers think should happen next (accept, reject, change).
+     * @param _status   What the reviewers think should happen next (accept, reject, change).
+     * @param _requests List of the requests asked by the reviewer.
      **/
-    function createReview(ReviewStatus _status) public returns (Review memory) {
+    function createReview(ReviewStatus _status, ChangeRequest[] memory _requests) public {
         Review memory review = Review({
             status: _status,
             id: currentReviewId
         });
 
+        addChangeRequestToReview(review.id, _requests);
         currentReviewId++;
-        return review;
     }
 
     /**
@@ -49,7 +50,7 @@ contract Reviews {
      * it will ask if he wants to add ChangeRequests.
      * The reviewer will create _requests array the front which will call 'createChangeRequest'
      **/
-    function addChangeRequestToReview(uint256 _reviewId, ChangeRequest[] memory _requests) public {
+    function addChangeRequestToReview(uint256 _reviewId, ChangeRequest[] memory _requests) private {
         uint changeRequestCount = reviewIdToChangeRequests[_reviewId].length;
         require(changeRequestCount == 0);
 
@@ -67,13 +68,14 @@ contract Reviews {
      *
      * Due to the length of a call to a contract, I think it would be best if the front
      * can create the changeRequests by itself.
+     * TODO: Will probably removed because the front can build them on its own
      **/
-    function createChangeRequest(string memory _comment, int _page, int _line)
-        public pure returns (ChangeRequest memory) {
-        return ChangeRequest({
-            comment: _comment,
-            page: _page,
-            line: _line
-        });
-    }
+//    function createChangeRequest(string memory _comment, int _page, int _line)
+//        public pure returns (ChangeRequest memory) {
+//        return ChangeRequest({
+//            comment: _comment,
+//            page: _page,
+//            line: _line
+//        });
+//    }
 }
