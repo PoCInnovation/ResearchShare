@@ -20,8 +20,8 @@ contract Users {
         @param _fields user fields
      */
     function registerUser(string memory _firstname, string memory _lastname, string[] memory _fields) public {
-        require(keccak256(bytes(_firstname)) != keccak256(bytes("")), "You must specify a non-empty user firstname");
-        require(keccak256(bytes(_lastname)) != keccak256(bytes("")), "You must specify a non-empty user lastname");
+        require(bytes(_firstname).length != 0, "You must specify a non-empty user firstname");
+        require(bytes(_lastname).length != 0, "You must specify a non-empty user lastname");
         require(_fields.length > 0, "You must specify at least one field");
         users[msg.sender] = User({
             firstname: _firstname,
