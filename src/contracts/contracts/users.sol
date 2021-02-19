@@ -32,6 +32,7 @@ contract Users {
     }
 
     function getUser() public view returns (User memory) {
+        require(bytes(users[msg.sender].firstname).length > 0, "User is not registered yet");
         return users[msg.sender];
     }
 }
