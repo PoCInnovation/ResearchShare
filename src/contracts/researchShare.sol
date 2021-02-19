@@ -29,25 +29,27 @@ contract ResearchShare is Users, Submits, Papers {
      *
      * @param _ipfsHash Hash of the submitter Paper.
      **/
-    function submitPaper(string memory _ipfsHash, string memory _scope) public {
+    function submitPaper(string memory _ipfsHash, string memory _field) public {
         uint submitId = newSubmit(_ipfsHash);
-        address[] memory reviewers = findReviewers(_scope, _ipfsHash);
+        address[] memory reviewers = findReviewers(_field, _ipfsHash, 2);
 
         addReviewers(submitId, reviewers);
         emit ReviewRequest(_ipfsHash, reviewers);
     }
 
     /**
-     * TODO: Add proper parameters
-     * TODO: Add process of finding reviewers
+     * Find reviewers random reviewers based on their competence fields
+     *
+     * @param _field Corresponding research field
+     * @param _ipfsHash Paper ipfs hash
+     * @param _n Number of reviewers to find
      **/
-    function findReviewers(string memory _scope, string memory _ipfsHash) private view returns (address[] memory) {
-        require(fieldToUser[_scope].length > 0, "No available reviewer for this field");
-        address[] memory reviewers = new address[](3);
-        address[] storage potentialReviewers = fieldToUser[_scope];
-        // TODO: Use better random generation (i.e : Randao)
+    function findReviewers(string memory _field, string memory _ipfsHash, uint256 _n) private view returns (address[] memory) {
+        require(fieldToUser[_field].length >= _n, "No available reviewer for this field");
+        address[] memory reviewers = new address[](_n);
+        address[] storage potentialReviewers = fieldToUser[_field];
         uint rand_val = _generateRandomNum(0, potentialReviewers.length, _ipfsHash);
-        reviewers[0] = (potentialReviewers[rand_val]);
+        for (uint i = 0; i < _n; i++) { reviewers[_n] = (potentialReviewers[rand_val + i]); }
         return (reviewers);
     }
 }
