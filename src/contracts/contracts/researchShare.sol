@@ -31,7 +31,7 @@ contract ResearchShare is Users, Submits, Papers {
      **/
     function submitPaper(string memory _ipfsHash, string memory _field) public {
         uint submitId = newSubmit(_ipfsHash);
-        address[] memory reviewers = findReviewers(_field, _ipfsHash, 2);
+        address[] memory reviewers = findReviewers(_field, _ipfsHash, 1);
 
         addReviewers(submitId, reviewers);
         emit ReviewRequest(_ipfsHash, reviewers);
@@ -45,7 +45,7 @@ contract ResearchShare is Users, Submits, Papers {
      * @param _n Number of reviewers to find
      **/
     function findReviewers(string memory _field, string memory _ipfsHash, uint256 _n) private view returns (address[] memory) {
-        require(fieldToUser[_field].length >= _n, "No available reviewer for this field");
+        require(fieldToUser[_field].length >= _n, "No enough reviewer available for this field");
         address[] memory reviewers = new address[](_n);
         address[] storage potentialReviewers = fieldToUser[_field];
         uint rand_val = _generateRandomNum(0, potentialReviewers.length, _ipfsHash);
