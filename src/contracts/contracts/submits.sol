@@ -57,9 +57,10 @@ contract Submits is Reviews {
      **/
     function addReview(string memory _ipfsHash, ReviewStatus _status) public returns (uint) {
         uint id = submitToId[_ipfsHash];
+        ChangeRequest[] memory requests;
         require(id != notSubmitted);
 
-        Review memory review = createReview(_status);
+        Review memory review = createReview(_status, requests);
         submitIdToReviews[id].push(review);
 
         return review.id;

@@ -30,7 +30,7 @@ contract Reviews {
      * @param _status   What the reviewers think should happen next (accept, reject, change).
      * @param _requests List of the requests asked by the reviewer.
      **/
-    function createReview(ReviewStatus _status, ChangeRequest[] memory _requests) public {
+    function createReview(ReviewStatus _status, ChangeRequest[] memory _requests) public returns (Review memory){
         Review memory review = Review({
             status: _status,
             id: currentReviewId
@@ -38,6 +38,7 @@ contract Reviews {
 
         addChangeRequestToReview(review.id, _requests);
         currentReviewId++;
+        return (review);
     }
 
     /**
