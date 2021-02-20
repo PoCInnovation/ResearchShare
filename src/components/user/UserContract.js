@@ -25,21 +25,23 @@ export function ContractUser({accountsAddresses}) {
 
     return (
         <div id="ConcatContract">
-            <div style={{display: 'inline-block', position: 'relative', float: 'right'}}>
-                <PulseLoader
-                    css={spinner ? {display: 'block'} : {display: 'none'}}
-                    size={10}
-                    color={"#123abc"}
-                />
-            </div>
+            <div id="margins">
+                <div style={{display: 'inline-block', position: 'relative', float: 'right'}}>
+                    <PulseLoader
+                        css={spinner ? {display: 'block'} : {display: 'none'}}
+                        size={10}
+                        color={"#123abc"}
+                    />
+                </div>
 
-            { contract ?
-                <UserInteract
-                    contract={contract}
-                    accounts={accounts}
-                    setSpinner={setSpinner}
-                />
-            : null }
+                { contract ?
+                    <UserInteract
+                        contract={contract}
+                        accounts={accounts}
+                        setSpinner={setSpinner}
+                    />
+                : null }
+            </div>
         </div>
     );
 }

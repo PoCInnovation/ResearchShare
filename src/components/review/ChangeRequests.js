@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
     left: {
         width: '20%',
         float: 'left'
+    },
+    change_request: {
+        backgroundColor: '#dddddd'
     }
 }));
 
@@ -40,9 +43,9 @@ export function ChangeRequests() {
         let newArr;
         if (changeRequests) {
             newArr = [...changeRequests];
-            newArr.push({content: undefined, line: undefined, page: undefined});
+            newArr.push({content: '', line: '', page: ''});
         } else {
-            newArr = [{content: undefined, line: undefined, page: undefined}];
+            newArr = [{content: '', line: '', page: ''}];
         }
         setChangeRequests(newArr)
     }
@@ -51,10 +54,10 @@ export function ChangeRequests() {
     }
 
     return (
-        <div id="change_requests">
+        <div>
             { changeRequests ? changeRequests.map((value , index) => {
                 return (
-                    <div key={index} id="change_request">
+                    <div key={index} className={classes.change_request}>
                         <Button className={classes.deleteChangeRequest}
                             onClick={(e) => {handleClickDeleteChangeRequest(e, index)}}>
                             <ClearIcon/>

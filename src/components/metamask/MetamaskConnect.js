@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { ContractUser } from '../user/UserContract';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Web3 from 'web3';
 
@@ -17,12 +18,25 @@ function connectToMetamask(window, setCurrentAccount) {
     }
 }
 
+const useStyles = makeStyles((theme) => ({
+    register: {
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: 'black'
+    }
+}));
+
 export function MetamaskHandling() {
     const [currentAccount, setCurrentAccount] = useState(null);
-
+    
+    const classes = useStyles();
+    
     useEffect(() => connectToMetamask(window, setCurrentAccount), []);
 
     return (
-        currentAccount ? <ContractUser accountsAddresses={currentAccount}/> : null
+        <div className={classes.register}>
+            <h2>Register</h2>
+            {currentAccount ? <ContractUser accountsAddresses={currentAccount}/> : null}
+        </div>
     );
 }
