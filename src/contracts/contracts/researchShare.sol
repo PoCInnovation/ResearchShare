@@ -21,24 +21,10 @@ contract ResearchShare is Users, Submits, Papers {
      * @param _y Upper Bound
      * @param _seed seed fo number generation
      */
-    function _generateRandomNum(uint _x, uint _y, string memory _seed) public pure returns (uint) {
+    function _generateRandomNum(uint _x, uint _y, string memory _seed) private pure returns (uint) {
         require(_x < _y);
         uint randVal = uint(keccak256(abi.encodePacked(_seed))) % (_y - _x) + _x;
         return (randVal);
-    }
-
-    /**
-     * Creates a Submit and start the Review process.
-     *
-     * @param _ipfsHash Hash of the submitter Paper.
-     * @param _field Research field
-     **/
-    function submitPaper(string memory _ipfsHash, string memory _field) public {
-        uint submitId = newSubmit(_ipfsHash);
-        address[] memory reviewers = findReviewers(_field, _ipfsHash, 1);
-
-        addReviewers(submitId, reviewers);
-        emit ReviewRequest(_ipfsHash, reviewers);
     }
 
     /**
@@ -55,5 +41,19 @@ contract ResearchShare is Users, Submits, Papers {
         uint rand_val = _generateRandomNum(0, potentialReviewers.length, _ipfsHash);
         for (uint i = 0; i < _n; i++) { reviewers[_n] = (potentialReviewers[rand_val + i]); }
         return (reviewers);
+    }
+
+    /**
+     * Creates a Submit and start the Review process.
+     *
+     * @param _ipfsHash Hash of the submitter Paper.
+     * @param _field Research field
+     **/
+    function submitPaper(string memory _ipfsHash, string memory _field) public {
+        uint submitId = newSubmit(_ipfsHash);
+        address[] memory reviewers = findReviewers(_field, _ipfsHash, 1);
+
+        addReviewers(submitId, reviewers);
+        emit ReviewRequest(_ipfsHash, reviewers);
     }
 }
