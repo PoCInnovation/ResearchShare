@@ -18,11 +18,11 @@ contract Reviews {
     struct Review {
         ReviewStatus status;
         uint256 id;
+        address reviewer;
     }
 
     mapping(uint256 => ChangeRequest[]) reviewIdToChangeRequests;
     uint256 private currentReviewId = 0;
-
 
     /**
      * Create a review and adds all the change requests to it.
@@ -30,10 +30,11 @@ contract Reviews {
      * @param _status   What the reviewers think should happen next (accept, reject, change).
      * @param _requests List of the requests asked by the reviewer.
      **/
-    function createReview(ReviewStatus _status, ChangeRequest[] memory _requests) public returns (Review memory){
+    function createReview(ReviewStatus _status, ChangeRequest[] memory _requests, address _reviewer) internal returns (Review memory){
         Review memory review = Review({
             status: _status,
-            id: currentReviewId
+            id: currentReviewId,
+            reviewer : _reviewer
         });
 
         addChangeRequestToReview(review.id, _requests);

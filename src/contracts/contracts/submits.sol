@@ -11,22 +11,46 @@ import "./reviews.sol";
  * Each Submit triggers a review process. Each reviewers can add a Review to a Submit.
  **/
 contract Submits is Reviews {
-    uint constant private notSubmitted = 0;
-    uint private currentSubmitId = 1;
-    mapping(uint => string) private idToSubmit;
-    mapping(string => uint) private submitToId;
+    uint constant internal notSubmitted = 0;
+    uint internal currentSubmitId = 1;
+    mapping(uint => string) internal idToSubmit;
+    mapping(string => uint) internal submitToId;
 
-    mapping(address => uint[]) userToSubmitsIds;
+    mapping(address => uint[]) internal userToSubmitsIds;
 
-    mapping(uint => Review[]) submitIdToReviews;
-    mapping(uint => address[]) private submitIdToReviewers; // TODO: handle this in addReview & creation of it
+    mapping(uint => Review[]) internal submitIdToReviews;
+    mapping(uint => address[]) internal submitIdToReviewers;
+
+    event ReviewSubmit(
+        string ipfsHash,
+        address reviewer,
+        ReviewStatus status,
+        ChangeRequest[] requests
+    );
+
+    /**
+     * Restrict access to reviewers only
+     *
+     * @param _ipfsHash Submit identifier
+     */
+    modifier onlyReviewer(string memory _ipfsHash) {
+        address[] memory submit_reviewers = submitIdToReviewers[submitToId[_ipfsHash]];
+        bool is_reviewer = false;
+        for (uint i = 0; i < submit_reviewers.length && is_reviewer == false; ++i) {
+            if (msg.sender == submit_reviewers[i]) {
+                is_reviewer = true;
+            }
+        }
+        require(is_reviewer == true, "User is not a reviewer for this paper");
+        _;
+    }
 
     /**
      * Add a submit to "userToSubmits" if it doesn't exists.
      *
      * @param _ipfsHash Hash of the submitted file.
      **/
-    function newSubmit(string memory _ipfsHash) public returns (uint) {
+    function newSubmit(string memory _ipfsHash) internal returns (uint) {
         require(submitToId[_ipfsHash] == notSubmitted);
 
         uint id = currentSubmitId;
@@ -47,22 +71,5 @@ contract Submits is Reviews {
      **/
     function addReviewers(uint _submitId, address[] memory _reviewers) public {
         submitIdToReviewers[_submitId] = _reviewers;
-    }
-
-    /**
-     * Add a new review to a submit and returns the review's id;
-     *
-     * @param _ipfsHash Hash of the submitted file.
-     * @param _status   What the reviewers think should happen next to the submit.
-     **/
-    function addReview(string memory _ipfsHash, ReviewStatus _status) public returns (uint) {
-        uint id = submitToId[_ipfsHash];
-        ChangeRequest[] memory requests;
-        require(id != notSubmitted);
-
-        Review memory review = createReview(_status, requests);
-        submitIdToReviews[id].push(review);
-
-        return review.id;
     }
 }
