@@ -11,15 +11,15 @@ import "./reviews.sol";
  * Each Submit triggers a review process. Each reviewers can add a Review to a Submit.
  **/
 contract Submits is Reviews {
-    uint constant private notSubmitted = 0;
-    uint private currentSubmitId = 1;
-    mapping(uint => string) private idToSubmit;
-    mapping(string => uint) private submitToId;
+    uint constant internal notSubmitted = 0;
+    uint internal currentSubmitId = 1;
+    mapping(uint => string) internal idToSubmit;
+    mapping(string => uint) internal submitToId;
 
-    mapping(address => uint[]) userToSubmitsIds;
+    mapping(address => uint[]) internal userToSubmitsIds;
 
-    mapping(uint => Review[]) submitIdToReviews;
-    mapping(uint => address[]) private submitIdToReviewers;
+    mapping(uint => Review[]) internal submitIdToReviews;
+    mapping(uint => address[]) internal submitIdToReviewers;
 
     event ReviewSubmit(
         string ipfsHash,
@@ -71,23 +71,5 @@ contract Submits is Reviews {
      **/
     function addReviewers(uint _submitId, address[] memory _reviewers) public {
         submitIdToReviewers[_submitId] = _reviewers;
-    }
-
-    /**
-     * Add a new review to a submit and returns the review's id;
-     *
-     * @param _ipfsHash Hash of the submitted file.
-     * @param _status   What the reviewers think should happen next to the submit.
-     * @param _requests Change requests (could be empty)
-     **/
-    function submitReview(string memory _ipfsHash, ReviewStatus _status, ChangeRequest[] memory _requests) public onlyReviewer(_ipfsHash) returns (uint) {
-        uint id = submitToId[_ipfsHash];
-        require(id != notSubmitted);
-
-        Review memory review = createReview(_status, _requests);
-        submitIdToReviews[id].push(review);
-
-        emit ReviewSubmit(_ipfsHash, msg.sender, _status, _requests);
-        return review.id;
     }
 }

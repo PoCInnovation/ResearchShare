@@ -56,4 +56,22 @@ contract ResearchShare is Users, Submits, Papers {
         addReviewers(submitId, reviewers);
         emit ReviewRequest(_ipfsHash, reviewers);
     }
+
+    /**
+     * Add a new review to a submit and returns the review's id;
+     *
+     * @param _ipfsHash Hash of the submitted file.
+     * @param _status   What the reviewers think should happen next to the submit.
+     * @param _requests Change requests (could be empty)
+     **/
+    function submitReview(string memory _ipfsHash, ReviewStatus _status, ChangeRequest[] memory _requests) public onlyReviewer(_ipfsHash) returns (uint) {
+        uint id = submitToId[_ipfsHash];
+        require(id != notSubmitted);
+
+        Review memory review = createReview(_status, _requests);
+        submitIdToReviews[id].push(review);
+
+        emit ReviewSubmit(_ipfsHash, msg.sender, _status, _requests);
+        return review.id;
+    }
 }
