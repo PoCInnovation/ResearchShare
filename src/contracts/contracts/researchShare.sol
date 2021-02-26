@@ -17,6 +17,9 @@ contract ResearchShare is Users, Submits, Papers {
      * Deprecated
      * Generate random number from date using keccak
      * This is only for tests. Use RANDAO in production instead
+     * @param _x Lower Bound
+     * @param _y Upper Bound
+     * @param _seed seed fo number generation
      */
     function _generateRandomNum(uint _x, uint _y, string memory _seed) public pure returns (uint) {
         require(_x < _y);
@@ -28,6 +31,7 @@ contract ResearchShare is Users, Submits, Papers {
      * Creates a Submit and start the Review process.
      *
      * @param _ipfsHash Hash of the submitter Paper.
+     * @param _field Research field
      **/
     function submitPaper(string memory _ipfsHash, string memory _field) public {
         uint submitId = newSubmit(_ipfsHash);
