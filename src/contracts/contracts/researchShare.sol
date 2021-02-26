@@ -13,6 +13,10 @@ contract ResearchShare is Users, Submits, Papers {
         address[] reviewers
     );
 
+    event Validation(
+        string _ipfsHash
+    );
+
     /**
      * Deprecated
      * Generate random number from date using keccak
@@ -58,6 +62,40 @@ contract ResearchShare is Users, Submits, Papers {
     }
 
     /**
+     * Publish the paper on ipfs
+     *
+     * @param _ipfsHash ipfsHash to publish
+     */
+    function publishPaper(string memory _ipfsHash) private {
+        // TODO Publish the paper (ISCN and Co.)
+    }
+
+    /**
+     * CallBack function called when a review is added
+     * 
+     * @param _ipfsHash submit ipfs hash
+     */
+    function onReview(string memory _ipfsHash) private {
+        uint256 submit_id = submitToId[_ipfsHash];
+        address[] memory reviewers = submitIdToReviewers[submit_id];
+        Review[] memory reviews = submitIdToReviews[submit_id];
+        uint16 validations = 0;
+
+        for (uint i = 0; i < reviewers.length; ++i) {
+            for (uint j = 0; j < reviews.length; ++j) {
+                if (reviews[j].status == ReviewStatus.Accepted && reviews[j].reviewer == reviewers[i]) {
+                    validations += 1;
+                    break;
+                }
+            }
+        }
+        if (validations == reviewers.length) {
+            publishPaper(_ipfsHash);
+            emit Validation(_ipfsHash);
+        }
+    }
+
+    /**
      * Add a new review to a submit and returns the review's id;
      *
      * @param _ipfsHash Hash of the submitted file.
@@ -68,10 +106,11 @@ contract ResearchShare is Users, Submits, Papers {
         uint id = submitToId[_ipfsHash];
         require(id != notSubmitted);
 
-        Review memory review = createReview(_status, _requests);
+        Review memory review = createReview(_status, _requests, msg.sender);
         submitIdToReviews[id].push(review);
 
         emit ReviewSubmit(_ipfsHash, msg.sender, _status, _requests);
+        onReview(_ipfsHash);
         return review.id;
     }
 }
