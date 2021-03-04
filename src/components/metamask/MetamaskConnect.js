@@ -5,6 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Web3 from 'web3';
 
+/**
+ * ask user to link his metamask account
+ * @param window - Global Window
+ * @param setCurrentAccount - function to setAccount
+ */
 function connectToMetamask(window, setCurrentAccount) {
     if (window.ethereum) {
         window.web3 = new Web3(window.ethereum);
@@ -28,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
 
 export function MetamaskHandling() {
     const [currentAccount, setCurrentAccount] = useState(null);
-    
+
     const classes = useStyles();
-    
+
     useEffect(() => connectToMetamask(window, setCurrentAccount), []);
 
     return (

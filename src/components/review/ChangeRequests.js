@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+/**
+ * Component function that is responsible of all changes requests of a review
+ * @param {object, functionn, number, number} param0
+ */
 export function ChangeRequests() {
     const [changeRequests, setChangeRequests] = React.useState(null);
 

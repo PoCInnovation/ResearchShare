@@ -27,9 +27,6 @@ async function downloadFromIPFS(ipfs, hash) {
  * @constructor
  */
 export function DownloadButton({ipfs}) {
-    // TODO: Provide way to download by filename
-    //       Back: Call smart contract to get hash by filename
-    //       Font: Provide way to input either hash or filename
     const [hash, setHash] = React.useState("");
 
     const handleClick = async (e) => {

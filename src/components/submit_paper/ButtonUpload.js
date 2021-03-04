@@ -16,15 +16,6 @@ async function uploadToIPFS(ipfs, fileContent, setFileHash) {
 }
 
 /**
- * Invoke our SmartContract to save the hash & filename.
- * @param ipfsHash {string} - Hash retrieved during {@link uploadToIPFS}.
- * @param filename {string} - Name of the file corresponding to the hash.
- */
-function callSmartContract(ipfsHash, filename) {
-    // TODO: do stuff
-}
-
-/**
  * Extract the filename from a filepath.
  * @param filepath {string} - Source of the name.
  * @param setFilename - Setter from `React.useState` to retrieve the name of the file.
@@ -33,16 +24,6 @@ function extractFilename(filepath, setFilename) {
     const result = /[^\\]*$/.exec(filepath)[0];
     setFilename(result);
 }
-
-/*function getMetadataForFile(file) {
-    // Not supported in Safari for iOS.
-    const name = file.name ? file.name : 'NOT SUPPORTED';
-    // Not supported in Firefox for Android or Opera for Android.
-    const type = file.type ? file.type : 'NOT SUPPORTED';
-    // Unknown cross-browser support.
-    const size = file.size ? file.size : 'NOT SUPPORTED';
-    console.log({file, name, type, size});
-}*/
 
 /**
  * Creates a FileReader to read a file and use the setter to extract it.
@@ -75,7 +56,6 @@ export function UploadButton({ipfs}) {
         if (!filename || !fileContent || !ipfs)
             return;
         await uploadToIPFS(ipfs, fileContent, setFileHash);
-        callSmartContract(fileHash, filename);
     };
 
     return (

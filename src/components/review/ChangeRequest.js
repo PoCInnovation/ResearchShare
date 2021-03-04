@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+/**
+ * Component function that is responsible of a single change request
+ * @param {object, functionn, number, number} param0
+ */
 export function ChangeRequest({changeRequests, setChangeRequests, value, index}) {
     const classes = useStyles();
 
@@ -57,7 +61,7 @@ export function ChangeRequest({changeRequests, setChangeRequests, value, index})
                 />
             </div><br/><br/>
             <div className={classes.change_requests_content}>
-                <TextField                                
+                <TextField
                     label="Comments"
                     placeholder="Enter Change Request Comments "
                     multiline

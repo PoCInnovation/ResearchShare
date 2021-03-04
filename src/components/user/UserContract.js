@@ -1,9 +1,9 @@
- import React, { useState, useEffect } from 'react';
-import './UserContract.css';
+import React, { useState, useEffect } from 'react';
 
 import PulseLoader from 'react-spinners/PulseLoader';
 
 import { UserInteract } from './UserInteract';
+import './UserContract.css';
 
 const users_contract = require('../../contracts/compiledContract.json').contracts["researchShare.sol"].ResearchShare;
 

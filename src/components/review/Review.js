@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     title_plus_status: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'center', // eslint-disable-next-line
         justifyContent: 'space-around',
         marginLeft: '5%',
         marginRight: '5%'
@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+/**
+ * Component function that is reponsible of reviews
+ */
 export function Review() {
     const [reviewStatus, setReviewStatus] = React.useState('Refuse');
     const [hash, setHash] = React.useState('');
@@ -66,7 +69,7 @@ export function Review() {
                                     return (<option value={value} key={index}>{value}</option>)
                                 })}
                             </NativeSelect>
-                        </FormControl>c
+                        </FormControl>
                     </div><br/>
                     <div className={classes.hash}>
                         <TextField id="standard-basic" label="Hash" value={hash} onChange={handleChange}/>
