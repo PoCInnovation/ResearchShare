@@ -24,7 +24,7 @@ const contract = require('../src/contracts/compiledContract.json').contracts["re
 		})
 		.send({
 			from: accounts[0],
-			gas: '2000000'
+			gas: '3000000'
 		});
     console.log(
         `Contract deployed at address: ${deployedContract.options.address}`

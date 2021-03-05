@@ -17,7 +17,7 @@ function connectToMetamask(window, setCurrentAccount) {
         window.ethereum
         .request({method : 'eth_requestAccounts'})
         .then((value) => setCurrentAccount(value[0]))
-        .catch(() => console.log('Please connect to MetaMask.'));
+        .catch(() => alert('Please connect to MetaMask.'));
     } else if (!window.web3) {
         alert('Please install MetaMask!');
     }
