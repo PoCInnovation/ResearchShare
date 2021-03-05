@@ -8,14 +8,27 @@ import "./papers.sol";
 
 contract ResearchShare is Users, Submits, Papers {
 
+    /**
+     * Emitted event when a review is require (= paper si submitted)
+     * 
+     * @param _ipfsHash paper ipfs hash
+     * @param reviewers reviewer list
+     */
     event ReviewRequest(
         string _ipfsHash,
         address[] reviewers
     );
 
+    /**
+     * Emitted event when a review is validated
+     * 
+     * @param _ipfsHash paper ipfs hash
+     */
     event Validation(
         string _ipfsHash
     );
+
+    mapping(string => bool) ipfsHashToValidationStatus;
 
     /**
      * Deprecated
@@ -48,6 +61,15 @@ contract ResearchShare is Users, Submits, Papers {
     }
 
     /**
+     * Answer true if the paper where _ipfsHash is pointing has been validated into this contract
+     * 
+     * @param _ipfsHash ipfs hash pointing to the document to certify
+     */
+    function certPaper(string memory _ipfsHash) public view returns(bool){
+        return (ipfsHashToValidationStatus[_ipfsHash]);
+    }
+
+    /**
      * Creates a Submit and start the Review process.
      *
      * @param _ipfsHash Hash of the submitter Paper.
@@ -67,7 +89,7 @@ contract ResearchShare is Users, Submits, Papers {
      * @param _ipfsHash ipfsHash to publish
      */
     function publishPaper(string memory _ipfsHash) private {
-        // TODO Publish the paper (ISCN and Co.)
+        ipfsHashToValidationStatus[_ipfsHash] = true;
     }
 
     /**
