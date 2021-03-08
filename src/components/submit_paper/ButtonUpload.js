@@ -2,6 +2,18 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import './ButtonUpload.css';
 
+import Input from '@material-ui/core/Input';
+
+import { connectToMetamask } from '../../utils/Utils';
+import { submitPaper } from '../../contracts/wrappers/researchShare';
+
+const rs_contract = require('../../contracts/compiledContract.json').contracts["researchShare.sol"].ResearchShare;
+
+async function loadContract(address, setContract) {
+    const contract = await new window.web3.eth.Contract(rs_contract.abi, address);
+    await setContract(contract);
+}
+
 /**
  * Upload the content of a file to IPFS via the client and save the file's hash.
  * @param ipfs - IPFS Client.
@@ -11,7 +23,7 @@ import './ButtonUpload.css';
  */
 async function uploadToIPFS(ipfs, fileContent, setFileHash) {
     const result = await ipfs.add(fileContent);
-    setFileHash(result.path);
+    await setFileHash(result.path);
 }
 
 /**
@@ -35,6 +47,15 @@ function getFileContent(file, setFileContent) {
     reader.readAsText(file);
 }
 
+function callSubmitPaper(account, contract, hash, field)
+{
+    if (!hash || !field) {
+        return;
+    }
+    console.log('hash: ', hash, 'field: ', field);
+    submitPaper(account, contract, hash, field);
+}
+
 /**
  * Component Function used to retrieve a file from the user's machine & upload it to IPFS.
  * @param ipfs - IPFS Client.
@@ -45,7 +66,15 @@ export function UploadButton({ipfs}) {
     const [filename, setFilename] = React.useState("");
     const [fileContent, setFileContent] = React.useState("");
     const [fileHash, setFileHash] = React.useState("");
+    const [currentAccount, setCurrentAccount] = React.useState(null);
+    const [contract, setContract] = React.useState(null);
+    const [paperField, setPaperField] = React.useState(null);
 
+    React.useEffect(() => {
+        loadContract(process.env.REACT_APP_CONTRACT_ADDRESS, setContract);
+    }, []);
+    React.useEffect(() => connectToMetamask(window, setCurrentAccount), []); // eslint-disable-next-line
+    React.useEffect(() => callSubmitPaper(currentAccount, contract, fileHash, paperField), [fileHash]);
     const inputOnChange = async (event) => {
         extractFilename(event.target.value, setFilename);
         getFileContent(event.target.files[0], setFileContent);
@@ -60,6 +89,7 @@ export function UploadButton({ipfs}) {
     return (
         <div>
             <div id="upload">
+                <Input placeholder='Field' onChange={(e) => setPaperField(e.target.value)} />
                 <input id="upload_input" onChange={inputOnChange} type="file"/>
                 <Button id="upload_button" onClick={buttonOnClick} variant="contained" color="primary">
                     Upload

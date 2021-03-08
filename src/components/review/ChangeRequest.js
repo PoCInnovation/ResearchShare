@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     change_requests_line: {
         width: '10%', float: 'left', marginLeft: '1%', maxWidth: '60px'
     },
-    change_requests_content: {
+    change_requests_comment: {
         marginTop: '5%', marginLeft: '5%', marginRight: '5%'
     }
 }));
@@ -23,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
 export function ChangeRequest({changeRequests, setChangeRequests, value, index}) {
     const classes = useStyles();
 
-    const handleChangeChangeRequestContent = (e, index) => {
+    const handleChangeChangeRequestComment = (e, index) => {
         let newArr = [...changeRequests];
 
-        newArr[index] = {...newArr[index], content: e.target.value};
+        newArr[index] = {...newArr[index], comment: e.target.value};
         setChangeRequests(newArr);
     }
     const handleChangeChangeRequestPage = (e, index) => {
@@ -43,7 +43,7 @@ export function ChangeRequest({changeRequests, setChangeRequests, value, index})
     }
 
     return (
-        <div id='ChangeRequestContent'>
+        <div id='ChangeRequestComment'>
             <div>
                 <TextField
                     className={classes.change_requests_page}
@@ -60,15 +60,15 @@ export function ChangeRequest({changeRequests, setChangeRequests, value, index})
                     onChange={(e) => handleChangeChangeRequestLine(e, index)}
                 />
             </div><br/><br/>
-            <div className={classes.change_requests_content}>
+            <div className={classes.change_requests_comment}>
                 <TextField
                     label="Comments"
                     placeholder="Enter Change Request Comments "
                     multiline
                     fullWidth
                     variant="filled"
-                    value={value.content}
-                    onChange={(e) => handleChangeChangeRequestContent(e, index)}
+                    value={value.comment}
+                    onChange={(e) => handleChangeChangeRequestComment(e, index)}
                 />
             </div>
         </div>

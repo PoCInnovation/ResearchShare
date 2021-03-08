@@ -75,7 +75,7 @@ export function Review() {
                         <TextField id="standard-basic" label="Hash" value={hash} onChange={handleChange}/>
                     </div>
                 </div>
-                <br/><ChangeRequests/>
+                <br/><ChangeRequests hash={hash} reviewStatus={reviewStatus}/>
             </div>
         </div>
     );

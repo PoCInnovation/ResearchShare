@@ -10,7 +10,7 @@ contract ResearchShare is Users, Submits, Papers {
 
     /**
      * Emitted event when a review is require (= paper si submitted)
-     * 
+     *
      * @param _ipfsHash paper ipfs hash
      * @param reviewers reviewer list
      */
@@ -21,7 +21,7 @@ contract ResearchShare is Users, Submits, Papers {
 
     /**
      * Emitted event when a review is validated
-     * 
+     *
      * @param _ipfsHash paper ipfs hash
      */
     event Validation(
@@ -62,7 +62,7 @@ contract ResearchShare is Users, Submits, Papers {
 
     /**
      * Answer true if the paper where _ipfsHash is pointing has been validated into this contract
-     * 
+     *
      * @param _ipfsHash ipfs hash pointing to the document to certify
      */
     function certPaper(string memory _ipfsHash) public view returns(bool){
@@ -94,7 +94,7 @@ contract ResearchShare is Users, Submits, Papers {
 
     /**
      * CallBack function called when a review is added
-     * 
+     *
      * @param _ipfsHash submit ipfs hash
      */
     function onReview(string memory _ipfsHash) private {
@@ -128,7 +128,7 @@ contract ResearchShare is Users, Submits, Papers {
         uint id = submitToId[_ipfsHash];
         require(id != notSubmitted);
 
-        Review memory review = createReview(_status, _requests, msg.sender);
+        Review memory review = createReview(_status, _requests);
         submitIdToReviews[id].push(review);
 
         emit ReviewSubmit(_ipfsHash, msg.sender, _status, _requests);

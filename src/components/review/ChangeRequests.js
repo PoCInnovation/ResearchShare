@@ -4,7 +4,13 @@ import ClearIcon from '@material-ui/icons/Clear';
 import Button from '@material-ui/core/Button';
 
 import { makeStyles } from '@material-ui/core/styles';
+
+import { connectToMetamask } from '../../utils/Utils';
 import { ChangeRequest } from './ChangeRequest';
+
+import { submitReview } from '../../contracts/wrappers/reviews';
+
+const rs_contract = require('../../contracts/compiledContract.json').contracts["researchShare.sol"].ResearchShare;
 
 const useStyles = makeStyles((theme) => ({
     deleteChangeRequest: {
@@ -28,14 +34,26 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+async function loadContract(address, setContract) {
+    const contract = await new window.web3.eth.Contract(rs_contract.abi, address);
+    await setContract(contract);
+}
+
 /**
  * Component function that is responsible of all changes requests of a review
  * @param {object, functionn, number, number} param0
  */
-export function ChangeRequests() {
+export function ChangeRequests({hash, reviewStatus}) {
+    const [currentAccount, setCurrentAccount] = React.useState(null);
     const [changeRequests, setChangeRequests] = React.useState(null);
+    const [contract, setContract] = React.useState(null);
 
     const classes = useStyles();
+
+    React.useEffect(() => {
+        loadContract(process.env.REACT_APP_CONTRACT_ADDRESS, setContract);
+    }, []);
+    React.useEffect(() => connectToMetamask(window, setCurrentAccount), []);
 
     const handleClickDeleteChangeRequest = (e, index) => {
         let newArr = [...changeRequests];
@@ -47,14 +65,14 @@ export function ChangeRequests() {
         let newArr;
         if (changeRequests) {
             newArr = [...changeRequests];
-            newArr.push({content: '', line: '', page: ''});
+            newArr.push({comment: '', page: '', line: ''});
         } else {
-            newArr = [{content: '', line: '', page: ''}];
+            newArr = [{comment: '', page: '', line: ''}];
         }
         setChangeRequests(newArr)
     }
     const handleClickDone = (e) => {
-        alert('Done Clicked');
+        submitReview(currentAccount, contract, hash, reviewStatus, changeRequests);
     }
 
     return (

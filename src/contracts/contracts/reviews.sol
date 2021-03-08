@@ -30,11 +30,11 @@ contract Reviews {
      * @param _status   What the reviewers think should happen next (accept, reject, change).
      * @param _requests List of the requests asked by the reviewer.
      **/
-    function createReview(ReviewStatus _status, ChangeRequest[] memory _requests, address _reviewer) internal returns (Review memory){
+    function createReview(ReviewStatus _status, ChangeRequest[] memory _requests) internal returns (Review memory){
         Review memory review = Review({
             status: _status,
             id: currentReviewId,
-            reviewer : _reviewer
+            reviewer : msg.sender
         });
 
         addChangeRequestToReview(review.id, _requests);
