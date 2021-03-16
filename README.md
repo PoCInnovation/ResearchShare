@@ -9,8 +9,8 @@
   - [First Iteration](#first-iteration)
   - [Second Iteration](#second-iteration)  
 
-## Introduction
 
+## Introduction
 ResearchShare is a platform where you can publish research papers for free.
 It uses [IPFS](https://ipfs.io/) & [Ethereum](https://ethereum.org/en/) [smart contracts](https://ethereum.org/en/developers/docs/smart-contracts/)
 to store and validate the papers.
@@ -20,6 +20,7 @@ you can find a very extensive doc about the processes, implementations, ..., [he
 
 It is currently going under it's [second iteration](#second-iteration). We aim to push this project much further
 than a simple PoC.
+
 
 ## Stack
 
@@ -32,8 +33,8 @@ than a simple PoC.
   - [TruffleSuite](https://www.trufflesuite.com/ganache) is used to tests our contracts.
   - [Docker](https://www.docker.com/) is used to deploy the platform via [compose](https://docs.docker.com/compose/)
 
-## Design
 
+## Design
 Before diving into the design, it is important to remember that the project is still a PoC. The design isn't set in stone
 and is very likely going to change, get more detailed, through time. You can find more details in the [doc](./doc) folder.
 
@@ -41,39 +42,35 @@ Because the platform aims to be an alternative to well known editors, we tried t
 to treat the submission of a paper. The following diagram is made from information we gathered and describes the big picture
 of what happens to a submitted paper.
 
-![Journey of a paper after its submission to an editor](./doc/SubmissionProcessDiagrams/EditorSP-withbg.svg "")
+![Journey of a paper after its submission to an editor](doc/Technical/SubmissionProcess/assets/EditorSP-withbg.svg "")
 
 And here's our version.
 
-![Journey of a paper after its submission to ResearchShare](./doc/SubmissionProcessDiagrams/ResearchShareSP-withbg.svg "")
+![Journey of a paper after its submission to ResearchShare](doc/Technical/SubmissionProcess/assets/ResearchShareSP-withbg.svg "")
 
 As you can see, they are similar. However it is important that we can't fully reproduce the editor's process as it can be hard,
 especially for a PoC, to describe them in terms of code. For further details, including information about the "clickable"
-elements of the diagram, be sure to checkout [this document](./doc/SubmitProcess.md).
+elements of the diagram, be sure to checkout [this document](doc/Technical/SubmissionProcess/SubmissionProcess.md).
 
-## Roadmap & Contributors
 
-In this section, you'll find what each iteration brought to the project as well as their contributors.
+## Roadmap
+In this section, you'll find what each iteration brought to the project.
+
 While the contributors changes, the project remains under the supervision of [Luca George-François](https://github.com/PtitLuca),
 who had the idea of the project, is the junior VP and manages the P2P projects within [PoC](https://www.poc-innovation.fr/).
 
 ### First Iteration
 It took place from September 2020 to March 2021, a first team focused on the following points:
 
-  - [x] [Draft of the process to submit a paper](./doc/SubmitProcess.md).
+  - [x] [Draft of the process to submit a paper](doc/Technical/SubmissionProcess/SubmissionProcess.md).
   - [x] [Draft of the Contracts](./doc/ContractsDiagrams).
   - [x] Upload a file to IPFS & save its hash via the contracts.
   - [x] Begin the implementations of the contracts.
     - [x] User registration (linked the to the contracts).
     - [x] Submit/retrieve a paper.
-    - [x] Find reviewers (best algorithm out there: random.
+    - [x] Find reviewers (the best algorithm out there: random).
     - [x] Submit a review.
   - [x] Very basic front proving components for the features we implemented
-
-**Contributors**:
-  - [Alexandre Chetrit](https://github.com/chetrit)
-  - [Matthis Cusin](https://github.com/Basilarc)
-  - [Quentin Veyrenc](https://github.com/VrncQuentin)
 
 ### Second Iteration
 While the 1st iteration got the foundations laid, they still need some work done which is why,
@@ -85,7 +82,14 @@ from mid March to the end of August 2021, a new team will aim to do the followin
   - [ ] Possibly, improve the way we use IPFS.
   - [ ] Possibly, improve the front.
 
-**Contributors**:
- - [Lucie Philippon](https://github.com/Ersikan)
- - [Alexandre Monier](https://github.com/ThalusA)
- - [Adina C.]()
+> You can find out more precise information about the work done [here](./doc/Versions.md)
+
+
+## Contributors
+
+- [Adina Cazalens]()
+- [Alexandre Chetrit](https://github.com/chetrit)
+- [Alexandre Monier](https://github.com/ThalusA)
+- [Lucie Philippon](https://github.com/Ersikan)
+- [Matthis Cusin](https://github.com/Basilarc)
+- [Quentin Veyrenc](https://github.com/VrncQuentin)
